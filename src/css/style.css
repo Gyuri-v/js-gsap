@@ -66,6 +66,7 @@ table {
 }
 
 .container {
+  background-color: #000;
   font-family: "Montserrat", "Pretendard-Regular";
 }
 
@@ -77,9 +78,6 @@ table {
   height: 100vh;
 }
 
-.title-wrap {
-  padding: 100px;
-}
 .title-wrap .title {
   font-size: 100px;
   font-weight: 600;
@@ -89,33 +87,91 @@ table {
 }
 
 .section-gsap {
-  height: 200vh;
-  background-color: #000;
+  height: 400vh;
+}
+.section-gsap .sticky-wrap {
+  padding: 100px;
+}
+.section-gsap .sticky-wrap .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: #fff;
 }
 .section-gsap .title-wrap .title {
-  color: #fff;
+  font-size: 20vh;
+  font-weight: 700;
+  color: transparent;
+  text-align: left;
+  -webkit-text-stroke: 1px #fff;
+  mix-blend-mode: difference;
 }
-.section-gsap .box {
+.section-gsap .title-wrap .text {
+  font-size: 80px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+.section-gsap .content-wrap {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin-top: 200vh;
+}
+.section-gsap .content-wrap .box {
   position: absolute;
-  top: 50%;
+  width: 300px;
+  height: 300px;
+  background: #fff;
+  margin: -150px 0 0 -150px;
+}
+.section-gsap .content-wrap .box-1 {
+  background-color: #aaa;
+  top: 15%;
+  left: 45%;
+  transform: rotate(-5deg);
+}
+.section-gsap .content-wrap .box-2 {
+  background-color: #999;
+  top: 40%;
+  left: 55%;
+  transform: rotate(10deg);
+}
+.section-gsap .content-wrap .box-3 {
+  background-color: #333;
+  top: 80%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
-  background-color: orange;
-  border-radius: 50%;
+  transform: rotate(0);
 }
 
 .section-timeline {
   height: 400vh;
+  background-color: #000;
 }
-.section-timeline .box {
+.section-timeline .title-wrap {
   position: absolute;
   top: 50%;
-  left: 0;
-  width: 100px;
-  height: 100px;
-  background-color: blue;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.section-timeline .title-wrap .title {
+  color: #fff;
+}
+.section-timeline .bg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  width: 0;
+  height: 100%;
+  background: url("../../assets/images/gsap_bg.jpg") no-repeat center/100vw;
+  opacity: 0.4;
 }
 
 .section-lottie {
@@ -142,10 +198,10 @@ table {
   padding: 0 100px;
 }
 .section-horizontal .scroll-wrap .text {
-  font-size: 80vh;
+  font-size: 60vh;
   font-weight: 600;
   color: #fff;
-  letter-spacing: -4vh;
+  letter-spacing: -2vh;
   white-space: nowrap;
 }
 
