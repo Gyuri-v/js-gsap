@@ -87,27 +87,54 @@ table {
 }
 
 .section-gsap {
-  height: 400vh;
+  height: 500vh;
 }
 .section-gsap .sticky-wrap {
   padding: 100px;
 }
 .section-gsap .sticky-wrap .bg {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: -1;
   width: 100%;
   height: 100%;
-  background: #fff;
+  transform-origin: center;
+}
+.section-gsap .sticky-wrap .bg-fave {
+  background: url("../../assets/images/gsap_bg-fave.jpeg") no-repeat center center/100vw;
+}
+.section-gsap .sticky-wrap .bg-forest {
+  background: url("../../assets/images/gsap_bg-forest.jpg") no-repeat center center/100vw;
+}
+.section-gsap .sticky-wrap .bg-orange {
+  background: url("../../assets/images/gsap_bg-orange.jpg") no-repeat center center/100vw;
+}
+.section-gsap .sticky-wrap .bg-last {
+  background-color: #000;
+}
+.section-gsap .sticky-wrap .bg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.5;
 }
 .section-gsap .title-wrap .title {
+  position: relative;
   font-size: 20vh;
   font-weight: 700;
   color: transparent;
   text-align: left;
   -webkit-text-stroke: 1px #fff;
   mix-blend-mode: difference;
+}
+.section-gsap .title-wrap .title svg path {
+  stroke: #fff;
 }
 .section-gsap .title-wrap .text {
   font-size: 80px;
@@ -118,38 +145,72 @@ table {
 }
 .section-gsap .content-wrap {
   position: relative;
-  width: 100%;
-  height: 100vh;
-  margin-top: 200vh;
 }
 .section-gsap .content-wrap .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   width: 300px;
   height: 300px;
   background: #fff;
-  margin: -150px 0 0 -150px;
+  margin: -75px 0 0 -150px;
+  padding: 40px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+}
+.section-gsap .content-wrap .box .txt {
+  display: block;
+  font-size: 36px;
+  font-weight: 700;
+  color: #000;
+  line-height: 1.3;
+}
+.section-gsap .content-wrap .box .icon {
+  display: block;
+  font-size: 72px;
 }
 .section-gsap .content-wrap .box-1 {
   background-color: #aaa;
-  top: 15%;
+  top: 50%;
   left: 45%;
   transform: rotate(-5deg);
 }
 .section-gsap .content-wrap .box-2 {
-  background-color: #999;
-  top: 40%;
+  background-color: #333;
+  top: 50%;
   left: 55%;
   transform: rotate(10deg);
 }
+.section-gsap .content-wrap .box-2 .txt {
+  color: #fff;
+}
 .section-gsap .content-wrap .box-3 {
-  background-color: #333;
-  top: 80%;
+  background-color: #f5f5f5;
+  top: 50%;
+  left: 48%;
+  transform: rotate(-10deg);
+}
+.section-gsap .content-wrap .box-4 {
+  background-color: #000;
+  top: 50%;
   left: 50%;
   transform: rotate(0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section-gsap .content-wrap .box-4 .txt {
+  font-size: 50px;
+  text-align: center;
+  color: #fff;
+}
+.section-gsap.end {
+  opacity: 0;
 }
 
 .section-timeline {
-  height: 400vh;
+  height: 500vh;
+  margin-top: -100vh;
   background-color: #000;
 }
 .section-timeline .title-wrap {
@@ -157,33 +218,87 @@ table {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 3;
   text-align: center;
 }
 .section-timeline .title-wrap .title {
+  position: relative;
+  font-size: 50px;
   color: #fff;
+  font-weight: 700;
 }
 .section-timeline .bg {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: -1;
-  width: 0;
-  height: 100%;
-  background: url("../../assets/images/gsap_bg.jpg") no-repeat center/100vw;
-  opacity: 0.4;
-}
-
-.section-lottie {
-  height: 200vh;
-}
-.section-lottie svg {
+  overflow: hidden;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) !important;
-  width: 600px !important;
-  height: auto !important;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  width: 300px;
+  height: 300px;
+  background-color: #000;
+  opacity: 0;
+}
+.section-timeline .bg-image {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../../assets/images/timeline-bg.jpg") no-repeat center/100vw;
+  opacity: 0;
+}
+.section-timeline.active .bg {
+  opacity: 1;
+}
+
+.section-lottie {
+  height: 300vh;
+}
+.section-lottie .title-wrap {
+  padding: 100px 0;
+}
+.section-lottie .title-wrap .title {
+  font-size: 150px;
+  font-weight: 700;
+}
+.section-lottie .lottie {
+  position: absolute;
+}
+.section-lottie .lottie-1 {
+  z-index: 3;
+  bottom: 100px;
+  left: 50%;
+  width: 1080px;
+  margin-left: -540px;
+}
+.section-lottie .lottie-2 {
+  z-index: 1;
+  top: -25vh;
+  left: 0;
+  width: 100vw;
+}
+.section-lottie .lottie-3 {
+  z-index: 2;
+  bottom: 100px;
+  left: 200px;
+  width: 400px;
+}
+.section-lottie .lottie-4 {
+  z-index: 2;
+  bottom: 100px;
+  right: 100px;
+  width: 300px;
+}
+.section-lottie .lottie-5 {
+  z-index: 2;
+  bottom: 100px;
+  right: 300px;
+  width: 300px;
+}
+.section-lottie.active {
+  background-color: #fff;
 }
 
 .section-horizontal {

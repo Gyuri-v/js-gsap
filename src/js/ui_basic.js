@@ -4,37 +4,27 @@
     const App = function () {
         // gsap 
         const gsapSection = container.querySelector('.section-gsap');
-        const gsapBg = gsapSection.querySelector('.bg');
-        const gsapBox1 = gsapSection.querySelector('.box-1');
-        const gsapBox2 = gsapSection.querySelector('.box-2');
-        const gsapBox3 = gsapSection.querySelector('.box-3');
-        // const gsapInner = gsapSection.querySelector('.sticky-inner');
-        const gsapTween1 = gsap.to(gsapBg, {
-            x: "100vw",
+        const gsapBox = gsapSection.querySelector('.box');
+        const gsapTween = gsap.to(gsapBox, {
+            scale: 30,
+            backgroundColor: '#fff',
             duration: 1,
             ease: 'power1.inOut',
             paused: true,
-        });
+        }); 
         scroller( gsapSection, {
-            scroll: function (e) {
-                console.log(e.toFixed(2), (e / 3 * 10).toFixed(2), ((e - 0.3) / 7 * 10).toFixed(2))
-                gsapTween1.progress(e / 3 * 10,);
-                gsapTween2.progress((e - 0.2) / 5 * 10);
-                gsapTween3.progress((e - 0.3) / 5 * 10);
-                gsapTween4.progress((e - 0.4) / 5 * 10);
-            }
+            scroll: function (e) { gsapTween.progress(e) }
         });
 
         // timeline
         const timelineSection = container.querySelector('.section-timeline');
-        const timelineTit = timelineSection.querySelector('.title');
-        const timelineBox = timelineSection.querySelector('.bg');
+        const timelineBox = timelineSection.querySelector('.box');
         const timelineTimeline = gsap.timeline({paused: true}); 
-        timelineTimeline.to( timelineBox, { width: "100%", duration: 1} );
-        // timelineTimeline.to( timelineTit, { scale: 30, duration: 1} );
-        // timelineTimeline.to( timelineBox, { rotation: 0, backgroundColor: '#05d', duration: 1} );
-        // timelineTimeline.to( timelineBox, { rotation: 180, backgroundColor: '#5d0', duration: 1} );
-        // timelineTimeline.to( timelineBox, { rotation: 0, backgroundColor: '#05d', duration: 1} );
+        timelineTimeline.to( timelineBox, { x: '90vw', duration: 1} );
+        timelineTimeline.to( timelineBox, { rotation: 180, backgroundColor: '#5d0', duration: 1} );
+        timelineTimeline.to( timelineBox, { rotation: 0, backgroundColor: '#05d', duration: 1} );
+        timelineTimeline.to( timelineBox, { rotation: 180, backgroundColor: '#5d0', duration: 1} );
+        timelineTimeline.to( timelineBox, { rotation: 0, backgroundColor: '#05d', duration: 1} );
         scroller( timelineSection, {
             scroll: function (e) { timelineTimeline.progress(e) }
         });
@@ -63,7 +53,7 @@
         console.log(horizontalInner.scrollWidth)
         scroller(horizontalSection, {
             scroll: function (e) {
-                gsap.set(horizontalInner, { x: -(horizontalInnerWidth) * Math.min(1, Math.max(0, e)) })
+                gsap.set(horizontalInner, { x: -(horizontalInnerWidth - window.innerWidth) * Math.min(1, Math.max(0, e)) })
             }
         })
 
@@ -94,6 +84,7 @@
             );
             io.observe(wrap);
 
+
             window.addEventListener('load', resize);
             window.addEventListener('scroll', scroll);
         }
@@ -113,8 +104,6 @@
             const scrollTop = window.scrollY - selector.offsetTop;
             const moveArea = selector.getBoundingClientRect().height - window.innerHeight;
             const percent = scrollTop / moveArea;
-            
-            if ( percent > 1.2 ) return; 
 
             options.scroll(percent);
         }
