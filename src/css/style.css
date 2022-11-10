@@ -83,7 +83,6 @@ table {
   font-weight: 600;
   color: #000;
   letter-spacing: -2px;
-  white-space: nowrap;
 }
 
 .section-gsap {
@@ -254,14 +253,29 @@ table {
 }
 
 .section-lottie {
-  height: 300vh;
+  height: 400vh;
+  background-color: #000;
+  transition: background 0.2s;
 }
 .section-lottie .title-wrap {
   padding: 100px 0;
 }
 .section-lottie .title-wrap .title {
+  display: inline-block;
   font-size: 150px;
   font-weight: 700;
+  white-space: nowrap;
+  background-color: #000;
+  transition: background 0.2s;
+}
+.section-lottie .title-wrap .title span {
+  display: inline-block;
+  mix-blend-mode: difference;
+  color: #fff;
+}
+.section-lottie .title-wrap .title span:nth-child(2n) {
+  color: transparent;
+  -webkit-text-stroke: 2px #fff;
 }
 .section-lottie .lottie {
   position: absolute;
@@ -300,17 +314,34 @@ table {
 .section-lottie.active {
   background-color: #fff;
 }
+.section-lottie.active .title-wrap .title {
+  background-color: #fff;
+}
 
 .section-horizontal {
+  position: relative;
+  z-index: 2;
   height: 400vh;
+  margin-top: -100vh;
   background-color: #000;
 }
+.section-horizontal .sticky-wrap {
+  padding: 100px;
+}
 .section-horizontal .title-wrap .title {
+  margin-bottom: 40px;
+  font-weight: 700;
   color: #fff;
+}
+.section-horizontal .title-wrap .text {
+  font-size: 36px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.3;
 }
 .section-horizontal .scroll-wrap {
   display: inline-block;
-  padding: 0 100px;
+  position: relative;
 }
 .section-horizontal .scroll-wrap .text {
   font-size: 60vh;
@@ -318,6 +349,48 @@ table {
   color: #fff;
   letter-spacing: -2vh;
   white-space: nowrap;
+}
+.section-horizontal .scroll-wrap .icon {
+  position: absolute;
+  font-size: 240px;
+}
+.section-horizontal .scroll-wrap .icon-love {
+  top: 28%;
+  left: -1%;
+}
+.section-horizontal .scroll-wrap .icon-rainbow {
+  top: 13%;
+  left: 36%;
+  z-index: -1;
+}
+.section-horizontal .scroll-wrap .icon-glitter {
+  top: 5%;
+  left: 33%;
+  font-size: 180px;
+}
+.section-horizontal .scroll-wrap .icon-good {
+  top: 56%;
+  left: 78%;
+  z-index: -1;
+}
+.section-horizontal .scroll-wrap .img {
+  position: absolute;
+  width: 320px;
+  height: 200px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.8);
+}
+.section-horizontal .scroll-wrap .img-1 {
+  top: 75%;
+  left: 30%;
+}
+.section-horizontal .scroll-wrap .img-2 {
+  top: 5%;
+  left: 80%;
+}
+.section-horizontal .scroll-wrap .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /*# sourceMappingURL=style.css.map */

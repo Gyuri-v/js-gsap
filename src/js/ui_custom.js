@@ -1,7 +1,9 @@
 (function () {
     const container = document.querySelector('.container');
-
+    
     const App = function () {
+        let windowWidth = window.innerWidth;
+
         // gsap 
         const gsapSection = container.querySelector('.section-gsap');
         gsapSection.querySelectorAll('path').forEach(function (item) {
@@ -173,9 +175,8 @@
         timelineTween.to( timelineSection.querySelector('.bg'), { height: "100%", duration: 1} );
         timelineTween.to( timelineSection.querySelector('.bg'), { width: "100%", duration: 1} );
         timelineTween.to( timelineSection.querySelector('.title'), { scale: 3, duration: 1} );
-        timelineTween.to( timelineSection.querySelector('.bg-image'), { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1} );
-        timelineTween.to( timelineSection.querySelector('.bg-image'), { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1} );
-        timelineTween.to( timelineSection.querySelector('.title-wrap'), { top: "20%", duration: 1} );
+        timelineTween.to( timelineSection.querySelector('.bg-image'), { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1}, 'timelineBoth' );
+        timelineTween.to( timelineSection.querySelector('.title-wrap'), { top: "20%", duration: 1}, 'timelineBoth' );
         timelineTween.to( timelineSection.querySelector('.title'), { color: 'transparent', textStroke: '0.5px #fff', duration: 1} );
 		ScrollTrigger.create({
 			animation: timelineTween,
@@ -228,21 +229,22 @@
             loop: false,
             autoplay: false,
         });
-		// gsap.fromTo(lottieSection.querySelector('.title-wrap'), {
-        //     x: lottieSection.querySelector('.section-lottie .title-wrap').offsetWidth,
-		// 	ease: 'power0.easeNone',
-		// 	scrollTrigger: {
-		// 		trigger: gsapSection,
-		// 		start: '0%',
-		// 		end: '100%',
-		// 		scrub: true,
-		// 	}
-		// });
+        console.log( lottieSection.querySelector('.title').offsetWidth - windowWidth );
+		gsap.to(lottieSection.querySelector('.title-wrap'), {
+            x: windowWidth - lottieSection.querySelector('.title').offsetWidth,
+			ease: 'power0.easeNone',
+			scrollTrigger: {
+				trigger: lottieSection,
+				start: '0%',
+				end: '100%',
+				scrub: true,
+			}
+		});
 		ScrollTrigger.create({
 			trigger: lottieSection,
 			scrub: true,
-			start: 'top top',
-			end: 'bottom bottom',
+			start: '0%',
+			end: '50%',
             onEnter: function () {
                 lottieSection.classList.add('active');
             },
@@ -261,14 +263,50 @@
         // horizontal-wrap
         // horizontal
         const horizontalSection = container.querySelector('.section-horizontal');
-        const horizontalInner = horizontalSection.querySelector('.scroll-wrap');
-        const horizontalInnerWidth = horizontalInner.scrollWidth;
-        console.log(horizontalInner.scrollWidth)
-        scroller(horizontalSection, {
-            scroll: function (e) {
-                gsap.set(horizontalInner, { x: -(horizontalInnerWidth) * Math.min(1, Math.max(0, e)) })
-            }
-        })
+        const horizontalSticky = horizontalSection.querySelector('.sticky-wrap');
+        const horizontalStickyPadding = parseInt(window.getComputedStyle( horizontalSticky, null ).getPropertyValue('padding-left') ) + parseInt(window.getComputedStyle( horizontalSticky, null ).getPropertyValue('padding-right') );
+        const horizontalScroll = horizontalSection.querySelector('.scroll-wrap');
+        const horizontalScrollValue = windowWidth - horizontalScroll.scrollWidth - horizontalStickyPadding;
+		gsap.to(horizontalScroll, {
+			x: horizontalScrollValue,
+			ease: 'linear',
+			scrollTrigger: {
+				trigger: horizontalSection,
+				start: 'top top',
+				end: 'bottom bottom',
+				scrub: true,
+			},
+		});
+		gsap.to(horizontalSection.querySelector('.img-1'), {
+			x: -500,
+			ease: 'linear',
+			scrollTrigger: {
+				trigger: horizontalSection,
+				start: 'top top',
+				end: 'bottom bottom',
+				scrub: true,
+			},
+		});
+		gsap.to(horizontalSection.querySelector('.img-2'), {
+			x: -600,
+			ease: 'linear',
+			scrollTrigger: {
+				trigger: horizontalSection,
+				start: 'top top',
+				end: 'bottom bottom',
+				scrub: true,
+			},
+		});
+		gsap.to(horizontalSection.querySelector('.icon-good'), {
+			x: 200,
+			ease: 'linear',
+			scrollTrigger: {
+				trigger: horizontalSection,
+				start: 'top top',
+				end: 'bottom bottom',
+				scrub: true,
+			},
+		});
 
     }
 
