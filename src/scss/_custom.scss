@@ -105,8 +105,9 @@
 
     .bg{
         overflow: hidden;
-        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1; width: 300px; height: 300px;
-        background-color: #000; opacity: 0;
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1; width: 100%; height: 100%;
+        background-color: #000; opacity: 0; 
+        // clip-path: inset(calc(50vh - 150px) calc(50vw - 150px));
 
         &-image{
             content: '';

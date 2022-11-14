@@ -3,10 +3,24 @@
     
     const App = function () {
         let windowWidth = window.innerWidth;
+        let windowHeight = window.innerHeight;
 
         // gsap 
-        const gsapSection = container.querySelector('.section-gsap');
-        gsapSection.querySelectorAll('path').forEach(function (item) {
+        const $gsapSection = container.querySelector('.section-gsap');
+		const $gsapSvgPaths = $gsapSection.querySelectorAll('path');
+		const $gsapTitleWrap = $gsapSection.querySelector('.title-wrap');
+		const $gsapBox1 = $gsapSection.querySelector('.box-1');
+		const $gsapBox2 = $gsapSection.querySelector('.box-2');
+		const $gsapBox3 = $gsapSection.querySelector('.box-3');
+		const $gsapBox4 = $gsapSection.querySelector('.box-4');
+		const $gsapBox4Text = $gsapSection.querySelector('.box-4 .txt');
+		const $gsapBgFave = $gsapSection.querySelector('.bg-fave');
+		const $gsapBgForest = $gsapSection.querySelector('.bg-forest');
+		const $gsapBgOrange = $gsapSection.querySelector('.bg-orange');
+		const $gsapBgLast = $gsapSection.querySelector('.bg-last');
+
+		for (let i = 0; i < $gsapSvgPaths.length; i++) {
+			const item = $gsapSvgPaths[i];
             const lineLength = Math.round(item.getTotalLength());
             item.style.strokeDasharray = lineLength;
             item.style.strokeDashoffset = lineLength;
@@ -14,242 +28,255 @@
                 strokeDashoffset: 0,
                 ease: 'cubic.inOut',
                 scrollTrigger: {
-                    trigger: gsapSection,
+                    trigger: $gsapSection,
                     start: '0',
                     end: '10%',
                     scrub: true,
                 }
             });
-        });
-		gsap.fromTo(gsapSection.querySelector('.box-1'), {
+			
+		}
+		gsap.fromTo($gsapBox1, {
 			y: "100vh",
 		},{
 			y: "-100vh",
 			ease: 'power0.easeNone',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '10%',
 				end: '60%',
 				scrub: true,
 			}
 		});
-		gsap.fromTo(gsapSection.querySelector('.bg-fave'), {
+		gsap.fromTo($gsapBgFave, {
 			opacity: 0,
-            width: 0,
-            height: 0,
+			clipPath: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
 		},{
 			opacity: 1,
-            width: "100%",
-            height: "100%",
+			clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
 			ease: 'ease.inOut',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '20%',
 				end: '25%',
 				scrub: true,
 			}
 		});
-		gsap.fromTo(gsapSection.querySelector('.box-2'), {
+		gsap.fromTo($gsapBox2, {
 			y: "100vh",
 		},{
 			y: "-100vh",
 			ease: 'power0.easeNone',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '20%',
 				end: '70%',
 				scrub: true,
 			}
 		});
-		gsap.fromTo(gsapSection.querySelector('.bg-forest'), {
+		gsap.fromTo($gsapBgForest, {
 			opacity: 0,
-            width: 0,
-            height: 0,
+			clipPath: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
 		},{
 			opacity: 1,
-            width: "100%",
-            height: "100%",
+			clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
 			ease: 'ease.inOut',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '30%',
 				end: '35%',
 				scrub: true,
 			}
 		});
-		gsap.fromTo(gsapSection.querySelector('.box-3'), {
+		gsap.fromTo($gsapBox3, {
 			y: "100vh",
 		},{
 			y: "-100vh",
 			ease: 'power0.easeNone',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '30%',
 				end: '80%',
 				scrub: true,
 			}
 		});
-		gsap.fromTo(gsapSection.querySelector('.bg-orange'), {
+		gsap.fromTo($gsapBgOrange, {
 			opacity: 0,
-            width: 0,
-            height: 0,
+			clipPath: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
 		},{
 			opacity: 1,
-            width: "100%",
-            height: "100%",
+			clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
 			ease: 'ease.inOut',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '40%',
 				end: '45%',
 				scrub: true,
 			}
 		});
-		gsap.fromTo(gsapSection.querySelector('.box-4'), {
+		gsap.fromTo($gsapBox4, {
 			y: "100vh",
 		},{
 			y: "0",
 			ease: 'power0.easeNone',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '50%',
 				end: '75%',
 				scrub: true,
 			}
 		});
-		gsap.fromTo(gsapSection.querySelector('.title-wrap'), {
+		gsap.fromTo($gsapTitleWrap, {
 			opacity: 1,
 		},{
 			opacity: 0,
 			ease: 'circ.easeOut',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '70%',
 				end: '75%',
 				scrub: true,
 			}
 		});
-		gsap.fromTo(gsapSection.querySelector('.box-4 .txt'), {
+		gsap.fromTo($gsapBox4Text, {
 			opacity: 1,
 		},{
 			opacity: 0,
 			ease: 'circ.easeOut',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '70%',
 				end: '75%',
 				scrub: true,
 			}
 		});
-		gsap.fromTo(gsapSection.querySelector('.bg-last'), {
+		gsap.fromTo($gsapBgLast, {
 			opacity: 0,
 		},{
 			opacity: 1,
 			ease: 'ease.inOut',
 			scrollTrigger: {
-				trigger: gsapSection,
+				trigger: $gsapSection,
 				start: '75%',
 				end: '80%',
 				scrub: true,
 			}
 		});
 		ScrollTrigger.create({
-			trigger: gsapSection,
+			trigger: $gsapSection,
 			scrub: 1,
 			start: '0%',
 			end: '80%',
             onLeave: function () {
-                gsapSection.classList.add('end');
+                $gsapSection.classList.add('end');
             },
             onToggle: function () {
-                if ( gsapSection.classList.contains('end') ) {
-                    gsapSection.classList.remove('end');
+                if ( $gsapSection.classList.contains('end') ) {
+                    $gsapSection.classList.remove('end');
                 }
             },
 		});
 
         // timeline
-        const timelineSection = container.querySelector('.section-timeline');
+        const $timelineSection = container.querySelector('.section-timeline');
+		const $timelineTitleWrap = $timelineSection.querySelector('.title-wrap');
+		const $timelineTitle = $timelineSection.querySelector('.title');
+		const $timelineBgWrap = $timelineSection.querySelector('.bg');
+		const $timelineBgImage = $timelineSection.querySelector('.bg-image');
+
+		const bgx1 = (windowWidth / 2 - 150) / windowWidth * 100;
+		const bgx2 = (windowWidth / 2 + 150) / windowWidth * 100;
+		const bgy1 = (windowHeight / 2 - 150) / windowHeight * 100;
+		const bgy2 = (windowHeight / 2 + 150) / windowHeight * 100;
+		$timelineBgWrap.style.clipPath = `polygon(${bgx1}% ${bgy1}%, ${bgx2}% ${bgy1}%, ${bgx2}% ${bgy2}%, ${bgx1}% ${bgy2}%)`;
+		
         const timelineTween = gsap.timeline({paused: true}); 
-        timelineTween.to( timelineSection.querySelector('.bg-image'), { opacity: 1, duration: 1} );
-        timelineTween.to( timelineSection.querySelector('.bg'), { height: "100%", duration: 1} );
-        timelineTween.to( timelineSection.querySelector('.bg'), { width: "100%", duration: 1} );
-        timelineTween.to( timelineSection.querySelector('.title'), { scale: 3, duration: 1} );
-        timelineTween.to( timelineSection.querySelector('.bg-image'), { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1}, 'timelineBoth' );
-        timelineTween.to( timelineSection.querySelector('.title-wrap'), { top: "20%", duration: 1}, 'timelineBoth' );
-        timelineTween.to( timelineSection.querySelector('.title'), { color: 'transparent', textStroke: '0.5px #fff', duration: 1} );
+        timelineTween.to( $timelineBgImage, { opacity: 1, duration: 1} );
+        timelineTween.to( $timelineBgWrap, { clipPath: `polygon(${bgx1}% 0%, ${bgx2}% 0%, ${bgx2}% 100%, ${bgx1}% 100%)`, duration: 1} );
+        timelineTween.to( $timelineBgWrap, { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1} );
+        timelineTween.to( $timelineTitle, { scale: 3, duration: 1} );
+        timelineTween.to( $timelineBgImage, { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1}, 'timelineBoth' );
+        timelineTween.to( $timelineTitleWrap, { top: "20%", duration: 1}, 'timelineBoth' );
+        timelineTween.to( $timelineTitle, { color: 'transparent', textStroke: '0.5px #fff', duration: 1} );
 		ScrollTrigger.create({
 			animation: timelineTween,
-			trigger: timelineSection,
+			trigger: $timelineSection,
 			scrub: true,
 			start: 'top top',
 			end: 'bottom bottom',
             onEnter: function () {
-                timelineSection.classList.add('active');
+                $timelineSection.classList.add('active');
             },
             onLeaveBack: function () {
-                timelineSection.classList.remove('active');
+                $timelineSection.classList.remove('active');
             },
 		});
 
         // lottie
-        const lottieSection = container.querySelector('.section-lottie');
+        const $lottieSection = container.querySelector('.section-lottie');
+		const $lottieBox1 = $lottieSection.querySelector('.sticky-wrap .lottie-1');
+		const $lottieBox2 = $lottieSection.querySelector('.sticky-wrap .lottie-2');
+		const $lottieBox3 = $lottieSection.querySelector('.sticky-wrap .lottie-3');
+		const $lottieBox4 = $lottieSection.querySelector('.sticky-wrap .lottie-4');
+		const $lottieBox5 = $lottieSection.querySelector('.sticky-wrap .lottie-5');
+		const $lottieTitleWrap = $lottieSection.querySelector('.title-wrap');
+		const $lottieTitle = $lottieSection.querySelector('.title');
+
         const lottieAnimation1 = lottie.loadAnimation({
-            container: lottieSection.querySelector('.sticky-wrap .lottie-1'),
+            container: $lottieBox1,
             path: '../assets/lottie/91414-city-building-construction.json',
             renderer: 'svg',
             loop: false,
             autoplay: false,
         });
         const lottieAnimation2 = lottie.loadAnimation({
-            container: lottieSection.querySelector('.sticky-wrap .lottie-2'),
+            container: $lottieBox2,
             path: '../assets/lottie/66615-wave-blue-lines.json',
             renderer: 'svg',
             loop: false,
             autoplay: false,
         });
         const lottieAnimation3 = lottie.loadAnimation({
-            container: lottieSection.querySelector('.sticky-wrap .lottie-3'),
+            container: $lottieBox3,
             path: '../assets/lottie/107005-energyshares-tree1.json',
             renderer: 'svg',
             loop: false,
             autoplay: false,
         });
         const lottieAnimation4 = lottie.loadAnimation({
-            container: lottieSection.querySelector('.sticky-wrap .lottie-4'),
+            container: $lottieBox4,
             path: '../assets/lottie/107006-energyshares-tree2.json',
             renderer: 'svg',
             loop: false,
             autoplay: false,
         });
         const lottieAnimation5 = lottie.loadAnimation({
-            container: lottieSection.querySelector('.sticky-wrap .lottie-5'),
+            container: $lottieBox5,
             path: '../assets/lottie/107008-energyshares-tree4.json',
             renderer: 'svg',
             loop: false,
             autoplay: false,
         });
-        console.log( lottieSection.querySelector('.title').offsetWidth - windowWidth );
-		gsap.to(lottieSection.querySelector('.title-wrap'), {
-            x: windowWidth - lottieSection.querySelector('.title').offsetWidth,
+		gsap.to($lottieTitleWrap, {
+            x: windowWidth - $lottieTitle.offsetWidth,
 			ease: 'power0.easeNone',
 			scrollTrigger: {
-				trigger: lottieSection,
+				trigger: $lottieSection,
 				start: '0%',
 				end: '100%',
 				scrub: true,
 			}
 		});
 		ScrollTrigger.create({
-			trigger: lottieSection,
+			trigger: $lottieSection,
 			scrub: true,
 			start: '0%',
 			end: '50%',
             onEnter: function () {
-                lottieSection.classList.add('active');
+                $lottieSection.classList.add('active');
             },
             onLeaveBack: function () {
-                lottieSection.classList.remove('active');
+                $lottieSection.classList.remove('active');
             },
 			onUpdate: function(self) {
 				lottieAnimation1.goToAndStop(self.progress * (lottieAnimation1.totalFrames - 1), true);
@@ -262,46 +289,49 @@
 
         // horizontal-wrap
         // horizontal
-        const horizontalSection = container.querySelector('.section-horizontal');
-        const horizontalSticky = horizontalSection.querySelector('.sticky-wrap');
-        const horizontalStickyPadding = parseInt(window.getComputedStyle( horizontalSticky, null ).getPropertyValue('padding-left') ) + parseInt(window.getComputedStyle( horizontalSticky, null ).getPropertyValue('padding-right') );
-        const horizontalScroll = horizontalSection.querySelector('.scroll-wrap');
-        const horizontalScrollValue = windowWidth - horizontalScroll.scrollWidth - horizontalStickyPadding;
-		gsap.to(horizontalScroll, {
+        const $horizontalSection = container.querySelector('.section-horizontal');
+        const $horizontalSticky = $horizontalSection.querySelector('.sticky-wrap');
+        const $horizontalScroll = $horizontalSection.querySelector('.scroll-wrap');
+        const $horizontalImage1 = $horizontalSection.querySelector('.img-1');
+        const $horizontalImage2 = $horizontalSection.querySelector('.img-2');
+        const $horizontalIconGood = $horizontalSection.querySelector('.icon-good');
+        const horizontalStickyPadding = parseInt(window.getComputedStyle( $horizontalSticky, null ).getPropertyValue('padding-left') ) + parseInt(window.getComputedStyle( $horizontalSticky, null ).getPropertyValue('padding-right') );
+        const horizontalScrollValue = windowWidth - $horizontalScroll.scrollWidth - horizontalStickyPadding;
+		gsap.to($horizontalScroll, {
 			x: horizontalScrollValue,
 			ease: 'linear',
 			scrollTrigger: {
-				trigger: horizontalSection,
+				trigger: $horizontalSection,
 				start: 'top top',
 				end: 'bottom bottom',
 				scrub: true,
 			},
 		});
-		gsap.to(horizontalSection.querySelector('.img-1'), {
+		gsap.to($horizontalImage1, {
 			x: -500,
 			ease: 'linear',
 			scrollTrigger: {
-				trigger: horizontalSection,
+				trigger: $horizontalSection,
 				start: 'top top',
 				end: 'bottom bottom',
 				scrub: true,
 			},
 		});
-		gsap.to(horizontalSection.querySelector('.img-2'), {
+		gsap.to($horizontalImage2, {
 			x: -600,
 			ease: 'linear',
 			scrollTrigger: {
-				trigger: horizontalSection,
+				trigger: $horizontalSection,
 				start: 'top top',
 				end: 'bottom bottom',
 				scrub: true,
 			},
 		});
-		gsap.to(horizontalSection.querySelector('.icon-good'), {
+		gsap.to($horizontalIconGood, {
 			x: 200,
 			ease: 'linear',
 			scrollTrigger: {
-				trigger: horizontalSection,
+				trigger: $horizontalSection,
 				start: 'top top',
 				end: 'bottom bottom',
 				scrub: true,
@@ -309,6 +339,11 @@
 		});
 
     }
+
+
+
+
+
 
     // const scroller = function ( selector, options ) {
     //     let wrap;
