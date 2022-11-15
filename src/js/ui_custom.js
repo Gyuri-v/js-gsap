@@ -1,9 +1,10 @@
 (function () {
-    const container = document.querySelector('.container');
+
+	let ww = window.innerWidth;
+	let wh = window.innerHeight;
     
     const App = function () {
-        let windowWidth = window.innerWidth;
-        let windowHeight = window.innerHeight;
+		const container = document.querySelector('.container');
 
         // gsap 
         const $gsapSection = container.querySelector('.section-gsap');
@@ -184,20 +185,20 @@
 		const $timelineBgWrap = $timelineSection.querySelector('.bg');
 		const $timelineBgImage = $timelineSection.querySelector('.bg-image');
 
-		const bgx1 = (windowWidth / 2 - 150) / windowWidth * 100;
-		const bgx2 = (windowWidth / 2 + 150) / windowWidth * 100;
-		const bgy1 = (windowHeight / 2 - 150) / windowHeight * 100;
-		const bgy2 = (windowHeight / 2 + 150) / windowHeight * 100;
+		const bgx1 = (ww / 2 - 150) / ww * 100;
+		const bgx2 = (ww / 2 + 150) / ww * 100;
+		const bgy1 = (wh / 2 - 150) / wh * 100;
+		const bgy2 = (wh / 2 + 150) / wh * 100;
 		$timelineBgWrap.style.clipPath = `polygon(${bgx1}% ${bgy1}%, ${bgx2}% ${bgy1}%, ${bgx2}% ${bgy2}%, ${bgx1}% ${bgy2}%)`;
 		
-        const timelineTween = gsap.timeline({paused: true}); 
+        const timelineTween = gsap.timeline({ paused: true }); 
         timelineTween.to( $timelineBgImage, { opacity: 1, duration: 1} );
-        timelineTween.to( $timelineBgWrap, { clipPath: `polygon(${bgx1}% 0%, ${bgx2}% 0%, ${bgx2}% 100%, ${bgx1}% 100%)`, duration: 1} );
-        timelineTween.to( $timelineBgWrap, { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1} );
-        timelineTween.to( $timelineTitle, { scale: 3, duration: 1} );
+        timelineTween.to( $timelineBgWrap,  { clipPath: `polygon(${bgx1}% 0%, ${bgx2}% 0%, ${bgx2}% 100%, ${bgx1}% 100%)`, duration: 1} );
+        timelineTween.to( $timelineBgWrap,  { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1} );
+        timelineTween.to( $timelineTitle,   { scale: 3, duration: 1} );
         timelineTween.to( $timelineBgImage, { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1}, 'timelineBoth' );
         timelineTween.to( $timelineTitleWrap, { top: "20%", duration: 1}, 'timelineBoth' );
-        timelineTween.to( $timelineTitle, { color: 'transparent', textStroke: '0.5px #fff', duration: 1} );
+        timelineTween.to( $timelineTitle,   { color: 'transparent', textStroke: '0.5px #fff', duration: 1} );
 		ScrollTrigger.create({
 			animation: timelineTween,
 			trigger: $timelineSection,
@@ -211,6 +212,20 @@
                 $timelineSection.classList.remove('active');
             },
 		});
+		// scroller( $timelineSection, {
+		// 	start: 0.2,
+		// 	enter: function () { 
+		// 		$timelineSection.classList.add('active'); 
+		// 		// $timelineSection.classList.remove('end'); 
+		// 	},
+		// 	enterBack: function () { 
+		// 		$timelineSection.classList.remove('active'); 
+		// 	},
+		// 	// leave: function () { 
+		// 	// 	$timelineSection.classList.add('end'); 
+		// 	// },
+        //     scroll: function (e) { timelineTween.progress(e) }
+        // });
 
         // lottie
         const $lottieSection = container.querySelector('.section-lottie');
@@ -219,8 +234,6 @@
 		const $lottieBox3 = $lottieSection.querySelector('.sticky-wrap .lottie-3');
 		const $lottieBox4 = $lottieSection.querySelector('.sticky-wrap .lottie-4');
 		const $lottieBox5 = $lottieSection.querySelector('.sticky-wrap .lottie-5');
-		const $lottieTitleWrap = $lottieSection.querySelector('.title-wrap');
-		const $lottieTitle = $lottieSection.querySelector('.title');
 
         const lottieAnimation1 = lottie.loadAnimation({
             container: $lottieBox1,
@@ -257,16 +270,24 @@
             loop: false,
             autoplay: false,
         });
-		gsap.to($lottieTitleWrap, {
-            x: windowWidth - $lottieTitle.offsetWidth,
-			ease: 'power0.easeNone',
-			scrollTrigger: {
-				trigger: $lottieSection,
-				start: '0%',
-				end: '100%',
-				scrub: true,
-			}
-		});
+		// scroller( $lottieSection, {
+		// 	// start: 0.25,
+		// 	enter: function () { 
+		// 		console.log('enter');
+        //         $lottieSection.classList.add('active');
+		// 	},
+		// 	enterBack: function () { 
+        //         $lottieSection.classList.remove('active');
+		// 	},
+        //     scroll: function (e) {
+		// 		timelineTween.progress(e) 
+		// 		lottieAnimation1.goToAndStop(e * (lottieAnimation1.totalFrames - 1), true);
+		// 		lottieAnimation2.goToAndStop(e * (lottieAnimation2.totalFrames - 1), true);
+		// 		lottieAnimation3.goToAndStop(e * (lottieAnimation3.totalFrames - 1), true);
+		// 		lottieAnimation4.goToAndStop(e * (lottieAnimation4.totalFrames - 1), true);
+		// 		lottieAnimation5.goToAndStop(e * (lottieAnimation5.totalFrames - 1), true);
+		// 	}
+        // });
 		ScrollTrigger.create({
 			trigger: $lottieSection,
 			scrub: true,
@@ -274,9 +295,11 @@
 			end: '50%',
             onEnter: function () {
                 $lottieSection.classList.add('active');
+                $lottieSection.classList.add('on');
             },
             onLeaveBack: function () {
                 $lottieSection.classList.remove('active');
+                $lottieSection.classList.remove('on');
             },
 			onUpdate: function(self) {
 				lottieAnimation1.goToAndStop(self.progress * (lottieAnimation1.totalFrames - 1), true);
@@ -295,8 +318,10 @@
         const $horizontalImage1 = $horizontalSection.querySelector('.img-1');
         const $horizontalImage2 = $horizontalSection.querySelector('.img-2');
         const $horizontalIconGood = $horizontalSection.querySelector('.icon-good');
-        const horizontalStickyPadding = parseInt(window.getComputedStyle( $horizontalSticky, null ).getPropertyValue('padding-left') ) + parseInt(window.getComputedStyle( $horizontalSticky, null ).getPropertyValue('padding-right') );
-        const horizontalScrollValue = windowWidth - $horizontalScroll.scrollWidth - horizontalStickyPadding;
+        const horizontalStickyPadding = 
+			parseInt(window.getComputedStyle( $horizontalSticky, null ).getPropertyValue('padding-left') ) + 
+			parseInt(window.getComputedStyle( $horizontalSticky, null ).getPropertyValue('padding-right') );
+        const horizontalScrollValue = ww - $horizontalScroll.scrollWidth - horizontalStickyPadding;
 		gsap.to($horizontalScroll, {
 			x: horizontalScrollValue,
 			ease: 'linear',
@@ -341,67 +366,110 @@
     }
 
 
+	// const scroller = function ( selector, options ) {
+	// 	let wrap;
+	// 	let wrapTop;
+	// 	let wrapHeight;
+	// 	let percent;
+	// 	let prevPercent;
+	// 	let chk = {
+	// 		on: false,
+	// 		off: false,
+	// 	}
 
+	// 	const init = function () {
+	// 		wrap = typeof selector == "string" ? document.querySelector(selector).querySelector('.sticky-wrap') : selector;
+	// 		if ( !wrap ) return false;
 
+	// 		wrapTop = selector.offsetTop;
+	// 		console.log( 'wrapTop',selector,  wrapTop )
+	// 		wrapHeight = selector.offsetHeight;
 
+	// 		const defaultOptions = {
+	// 			start: 0,
+	// 			end: 0,
+	// 			on: function () {},
+	// 			off: function () {},
+	// 			scroll: function () {},
+	// 			resize: function () {},
+	// 			enter: function () { },
+	// 			leave: function () {},
+	// 			enterBack: function () {},
+	// 			leaveBack: function () {},
+	// 		}
+	// 		options = Object.assign(defaultOptions, options);
+			
+	// 		window.addEventListener('resize', resize);
+	// 		window.addEventListener('scroll', scroll);
+	// 	}
 
-    // const scroller = function ( selector, options ) {
-    //     let wrap;
+	// 	const on = function () {
+	// 		chk.on = true;
+	// 		chk.off = false;
 
-    //     const init = function () {
-    //         wrap = typeof selector == "string" ? document.querySelector(selector) : selector;
-    //         if ( !wrap ) return false;
+	// 		selector.classList.add('on');
 
-    //         const defaultOptions = {
-    //             on: function () {},
-    //             off: function () {},
-    //             scroll: function () {},
-    //             resize: function () {},
-    //         }
-    //         options = Object.assign(defaultOptions, options);
+	// 		options.on();
 
-    //         io = new IntersectionObserver(
-    //             entries => {
-    //                 entries.forEach(entry => {
-    //                     if (entry.isIntersecting) on();
-    //                     else off();
-    //                 });
-    //             }
-    //         );
-    //         io.observe(wrap);
+	// 		console.log('on', percent, prevPercent);
 
-    //         window.addEventListener('load', resize);
-    //         window.addEventListener('scroll', scroll);
-    //     }
+	// 		if ( percent > 0 ) {
+	// 			options.enter();
 
-    //     const on = function () {
-    //         resize();
-    //         scroll();
-    //         options.on();
-    //     }
+	// 			if ( percent < prevPercent ) {
+	// 				options.leaveBack();
+	// 			}
+	// 		} else {
+	// 			options.enterBack();
+	// 		}
 
-    //     const off = function () {
-    //         scroll();
-    //         options.off();
-    //     }
+	// 		prevPercent = percent;
+	// 	}
 
-    //     const scroll = function (e) {
-    //         const scrollTop = window.scrollY - selector.offsetTop;
-    //         const moveArea = selector.getBoundingClientRect().height - window.innerHeight;
-    //         const percent = scrollTop / moveArea;
-            
-    //         if ( percent > 1.2 ) return; 
+	// 	const off = function () {
+	// 		chk.on = false;
+	// 		chk.off = true;
 
-    //         options.scroll(percent);
-    //     }
+	// 		selector.classList.remove('on');
 
-    //     const resize = function () {
-    //         options.resize();
-    //         scroll();
-    //     }
+	// 		console.log('off', percent, prevPercent);
 
-    //     init();
-    // }
+	// 		options.off();
+	// 		options.leave();
+
+	// 		if ( percent < prevPercent ) {
+	// 			options.enterBack();
+	// 		}
+
+	// 		prevPercent = percent;
+	// 	}
+
+	// 	const scroll = function (e) {
+	// 		const scrollY = window.scrollY;
+	// 		const scrollTop = scrollY - wrapTop;
+	// 		const moveArea = wrapHeight - wh;
+	// 		percent = scrollTop / moveArea;
+
+	// 		if ( !chk.on && scrollY > wrapTop - wh && scrollY < wrapTop + wrapHeight ) {
+	// 			on();
+	// 		}
+	// 		if ( !chk.off && scrollY < wrapTop - wh || scrollY > wrapTop + wrapHeight ) {
+	// 			off();
+	// 		}
+			
+	// 		if ( percent > 1.1 || percent < -0.1 ) return false;
+	// 		options.scroll(percent);
+	// 	}
+
+	// 	const resize = function () {
+	// 		options.resize();
+	// 		scroll();
+	// 	}
+
+	// 	init();
+	// }
 
     App();
+
+
 })();
