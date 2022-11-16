@@ -199,33 +199,126 @@
         timelineTween.to( $timelineBgImage, { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1}, 'timelineBoth' );
         timelineTween.to( $timelineTitleWrap, { top: "20%", duration: 1}, 'timelineBoth' );
         timelineTween.to( $timelineTitle,   { color: 'transparent', textStroke: '0.5px #fff', duration: 1} );
-		ScrollTrigger.create({
-			animation: timelineTween,
-			trigger: $timelineSection,
-			scrub: true,
-			start: 'top top',
-			end: 'bottom bottom',
-            onEnter: function () {
-                $timelineSection.classList.add('active');
-            },
-            onLeaveBack: function () {
-                $timelineSection.classList.remove('active');
-            },
+		// ScrollTrigger.create({
+		// 	animation: timelineTween,
+		// 	trigger: $timelineSection,
+		// 	scrub: true,
+		// 	start: 'top top',
+		// 	end: 'bottom bottom',
+        //     onEnter: function () {
+        //         $timelineSection.classList.add('active');
+        //     },
+        //     onLeaveBack: function () {
+        //         $timelineSection.classList.remove('active');
+        //     },
+		// });
+		scroller( $timelineSection, {
+			on: function () { 
+				$timelineSection.classList.add('active'); 
+			},
+			off: function () { 
+				$timelineSection.classList.remove('active'); 
+			},
+            scroll: function (e) { timelineTween.progress(e.percent) }
+        });
+
+
+		// blur
+        const $blurSection = container.querySelector('.section-blur');
+        const $blurTitle = $blurSection.querySelector('.title-wrap');
+        const $blurItems = $blurSection.querySelectorAll('.item');
+		const $blurImages = $blurSection.querySelectorAll('.img');
+		
+		const easeFactor = 0.15;
+		let position = { x: 0, y: 0 };
+		let delta = { x: 0, y: 0 };
+		let blurPercent = 0;
+
+		const setPostion = function (e) {
+			position.x = e.clientX;
+			position.y = e.clientY;
+			
+			delta.x += (position.x - delta.x) * easeFactor;
+			delta.y += (position.y - delta.y) * easeFactor;
+
+			if ( blurPercent < 0.3 ) {
+				// $blurImages[0].style.transform = `translate3d(${position.x * -0.02}px, ${position.y * -0.02}px, 0)`; 
+				$blurImages[1].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
+				$blurImages[2].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`; 
+			} else if ( blurPercent < 0.6 ) {
+				// $blurImages[3].style.transform = `translate3d(${position.x * -0.02}px, ${position.y * -0.02}px, 0)`; 
+				$blurImages[4].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
+				$blurImages[5].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`; 
+			} else if ( blurPercent < 0.9 ) {
+				// $blurImages[6].style.transform = `translate3d(${position.x * -0.02}px, ${position.y * -0.02}px, 0)`; 
+				$blurImages[7].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
+				$blurImages[8].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`;
+			}
+		};
+		window.addEventListener('mousemove', setPostion);
+
+		scroller( $blurSection , {
+			on: function () {
+				//
+			},
+			scroll: function(e) {
+				blurPercent = e.percent;
+
+				$blurItems[0].style.transform = `translate3d(${calcValue([0, 0.6], [0,  -300], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.3], [0, 200], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[1].style.transform = `translate3d(${calcValue([0, 0.6], [-300,  0], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.6], [-200, 200], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[2].style.transform = `translate3d(${calcValue([0, 0.9], [300, 0], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.9], [-400, 200], e.scrollTop, e.moveArea)}px)`;
+				
+				$blurItems[1].style.filter = `blur(${calcValue([0.27, 0.33], [20, 0], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[0].style.opacity = calcValue([0.25, 0.3], [1, 0], e.scrollTop, e.moveArea);
+				$blurItems[2].style.filter = `blur(${calcValue([0.57, 0.63], [20, 0], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[1].style.opacity = calcValue([0.55, 0.6], [1, 0], e.scrollTop, e.moveArea);
+				$blurItems[2].style.opacity = calcValue([0.85, 0.9], [1, 0], e.scrollTop, e.moveArea);
+
+				$movieVideoWrap.style.opacity = calcValue([0.75, 1], [0, 1], e.scrollTop, e.moveArea);
+
+				$blurTitle.style.transform = `translate3d(0, ${calcValue([0.9, 1], [0, -100], e.scrollTop, e.moveArea)}px, 0)`;
+				$blurTitle.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
+				$movieTitleWrap.style.opacity = calcValue([0.9, 1], [0, 1], e.scrollTop, e.moveArea);
+
+				if ( !$movieVideoWrap.classList.contains('fix') && e.percent > 0.75 ) {
+					$movieVideoWrap.classList.add('fix');
+				}
+			}
 		});
-		// scroller( $timelineSection, {
-		// 	start: 0.2,
-		// 	enter: function () { 
-		// 		$timelineSection.classList.add('active'); 
-		// 		// $timelineSection.classList.remove('end'); 
-		// 	},
-		// 	enterBack: function () { 
-		// 		$timelineSection.classList.remove('active'); 
-		// 	},
-		// 	// leave: function () { 
-		// 	// 	$timelineSection.classList.add('end'); 
-		// 	// },
-        //     scroll: function (e) { timelineTween.progress(e) }
-        // });
+
+			
+
+        // movie
+        const $movieSection = container.querySelector('.section-movie');
+		const $movieStickyWrap = $movieSection.querySelector('.sticky-wrap');
+		const $movieTitleWrap = $movieSection.querySelector('.title-wrap');
+		const $movieVideoWrap = $movieSection.querySelector('.video-wrap');
+		const $movieVideo = $movieSection.querySelector('video');
+		let movieVideoDuration = 0;
+
+		$movieVideo.addEventListener('canplay', function () {
+			movieVideoDuration = $movieVideo.duration;
+		});
+
+		scroller( $movieSection, {
+			on: function () { 
+				$movieSection.classList.add('active'); 
+			},
+			off: function () { 
+				$movieSection.classList.remove('active'); 
+			},
+            scroll: function (e) {
+				const movieTime = Math.max(0.2, Math.min(movieVideoDuration - 0.2, e.percent * movieVideoDuration));
+				$movieVideo.currentTime = movieTime;
+
+				if ( e.percent > 0 && $movieVideoWrap.classList.contains('fix') ) {
+					$movieVideoWrap.classList.remove('fix');
+				}
+			}
+        });
+
+
+
 
         // lottie
         const $lottieSection = container.querySelector('.section-lottie');
@@ -270,45 +363,47 @@
             loop: false,
             autoplay: false,
         });
-		// scroller( $lottieSection, {
-		// 	// start: 0.25,
-		// 	enter: function () { 
-		// 		console.log('enter');
-        //         $lottieSection.classList.add('active');
-		// 	},
-		// 	enterBack: function () { 
-        //         $lottieSection.classList.remove('active');
-		// 	},
-        //     scroll: function (e) {
-		// 		timelineTween.progress(e) 
-		// 		lottieAnimation1.goToAndStop(e * (lottieAnimation1.totalFrames - 1), true);
-		// 		lottieAnimation2.goToAndStop(e * (lottieAnimation2.totalFrames - 1), true);
-		// 		lottieAnimation3.goToAndStop(e * (lottieAnimation3.totalFrames - 1), true);
-		// 		lottieAnimation4.goToAndStop(e * (lottieAnimation4.totalFrames - 1), true);
-		// 		lottieAnimation5.goToAndStop(e * (lottieAnimation5.totalFrames - 1), true);
-		// 	}
-        // });
-		ScrollTrigger.create({
-			trigger: $lottieSection,
-			scrub: true,
-			start: '0%',
-			end: '50%',
-            onEnter: function () {
+		scroller( $lottieSection, {
+			// start: 0.25,
+			on: function () { 
+				console.log('enter');
                 $lottieSection.classList.add('active');
                 $lottieSection.classList.add('on');
-            },
-            onLeaveBack: function () {
+			},
+			off: function () { 
                 $lottieSection.classList.remove('active');
                 $lottieSection.classList.remove('on');
-            },
-			onUpdate: function(self) {
-				lottieAnimation1.goToAndStop(self.progress * (lottieAnimation1.totalFrames - 1), true);
-				lottieAnimation2.goToAndStop(self.progress * (lottieAnimation2.totalFrames - 1), true);
-				lottieAnimation3.goToAndStop(self.progress * (lottieAnimation3.totalFrames - 1), true);
-				lottieAnimation4.goToAndStop(self.progress * (lottieAnimation4.totalFrames - 1), true);
-				lottieAnimation5.goToAndStop(self.progress * (lottieAnimation5.totalFrames - 1), true);
+			},
+            scroll: function (e) {
+				timelineTween.progress(e) 
+				lottieAnimation1.goToAndStop(e.percent * (lottieAnimation1.totalFrames - 1), true);
+				lottieAnimation2.goToAndStop(e.percent * (lottieAnimation2.totalFrames - 1), true);
+				lottieAnimation3.goToAndStop(e.percent * (lottieAnimation3.totalFrames - 1), true);
+				lottieAnimation4.goToAndStop(e.percent * (lottieAnimation4.totalFrames - 1), true);
+				lottieAnimation5.goToAndStop(e.percent * (lottieAnimation5.totalFrames - 1), true);
 			}
-		});
+        });
+		// ScrollTrigger.create({
+		// 	trigger: $lottieSection,
+		// 	scrub: true,
+		// 	start: '0%',
+		// 	end: '50%',
+        //     onEnter: function () {
+        //         $lottieSection.classList.add('active');
+        //         $lottieSection.classList.add('on');
+        //     },
+        //     onLeaveBack: function () {
+        //         $lottieSection.classList.remove('active');
+        //         $lottieSection.classList.remove('on');
+        //     },
+		// 	onUpdate: function(self) {
+		// 		lottieAnimation1.goToAndStop(self.progress * (lottieAnimation1.totalFrames - 1), true);
+		// 		lottieAnimation2.goToAndStop(self.progress * (lottieAnimation2.totalFrames - 1), true);
+		// 		lottieAnimation3.goToAndStop(self.progress * (lottieAnimation3.totalFrames - 1), true);
+		// 		lottieAnimation4.goToAndStop(self.progress * (lottieAnimation4.totalFrames - 1), true);
+		// 		lottieAnimation5.goToAndStop(self.progress * (lottieAnimation5.totalFrames - 1), true);
+		// 	}
+		// });
 
         // horizontal-wrap
         // horizontal
@@ -366,108 +461,104 @@
     }
 
 
-	// const scroller = function ( selector, options ) {
-	// 	let wrap;
-	// 	let wrapTop;
-	// 	let wrapHeight;
-	// 	let percent;
-	// 	let prevPercent;
-	// 	let chk = {
-	// 		on: false,
-	// 		off: false,
-	// 	}
+	const scroller = function ( selector, options ) {
+        let wrap;
 
-	// 	const init = function () {
-	// 		wrap = typeof selector == "string" ? document.querySelector(selector).querySelector('.sticky-wrap') : selector;
-	// 		if ( !wrap ) return false;
+        const init = function () {
+            wrap = typeof selector == "string" ? document.querySelector(selector) : selector;
+            if ( !wrap ) return false;
 
-	// 		wrapTop = selector.offsetTop;
-	// 		console.log( 'wrapTop',selector,  wrapTop )
-	// 		wrapHeight = selector.offsetHeight;
+            const defaultOptions = {
+                on: function () {},
+                off: function () {},
+                scroll: function () {},
+                resize: function () {},
+            }
+            options = Object.assign(defaultOptions, options);
 
-	// 		const defaultOptions = {
-	// 			start: 0,
-	// 			end: 0,
-	// 			on: function () {},
-	// 			off: function () {},
-	// 			scroll: function () {},
-	// 			resize: function () {},
-	// 			enter: function () { },
-	// 			leave: function () {},
-	// 			enterBack: function () {},
-	// 			leaveBack: function () {},
-	// 		}
-	// 		options = Object.assign(defaultOptions, options);
+            io = new IntersectionObserver(
+                entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) on();
+                        else off();
+                    });
+                }
+            );
+            io.observe(wrap);
+        }
+
+        const on = function () {
+            resize();
+            scroll();
+            options.on();
 			
-	// 		window.addEventListener('resize', resize);
-	// 		window.addEventListener('scroll', scroll);
-	// 	}
+            window.addEventListener('scroll', scroll);
+        }
 
-	// 	const on = function () {
-	// 		chk.on = true;
-	// 		chk.off = false;
+        const off = function () {
+            scroll();
+            options.off();
 
-	// 		selector.classList.add('on');
+			window.removeEventListener('scroll', scroll);
+        }
 
-	// 		options.on();
+        const scroll = function (e) {
+            const scrollTop = window.scrollY - selector.offsetTop;
+            const moveArea = selector.getBoundingClientRect().height - window.innerHeight;
+            const percent = scrollTop / moveArea;
 
-	// 		console.log('on', percent, prevPercent);
+			const result = {
+				scrollTop,
+				moveArea,
+				percent,
+			}
 
-	// 		if ( percent > 0 ) {
-	// 			options.enter();
+            options.scroll(result);
+        }
 
-	// 			if ( percent < prevPercent ) {
-	// 				options.leaveBack();
-	// 			}
-	// 		} else {
-	// 			options.enterBack();
-	// 		}
+        const resize = function () {
+            options.resize();
+            scroll();
+        }
 
-	// 		prevPercent = percent;
-	// 	}
+        init();
+    }
 
-	// 	const off = function () {
-	// 		chk.on = false;
-	// 		chk.off = true;
+	const calcValue = function (step, value, scrollTop, moveArea) {
+		let partStart;
+		let partEnd;
+		let partArea;
+		let partSpot;
 
-	// 		selector.classList.remove('on');
+		let rv;
 
-	// 		console.log('off', percent, prevPercent);
+		if (typeof step === 'number') {
+			partSpot = moveArea * step;
 
-	// 		options.off();
-	// 		options.leave();
+			if (scrollTop < partSpot) {
+				rv = value[0];
+			} else {
+				rv = value[1];
+			}
+		} else {
+			partStart = moveArea * step[0];
+			partEnd = moveArea * step[1];
+			partArea = partEnd - partStart;
 
-	// 		if ( percent < prevPercent ) {
-	// 			options.enterBack();
-	// 		}
+			if (scrollTop < partStart) {
+				rv = value[0];
+			} else if (scrollTop > partEnd) {
+				rv = value[1];
+			} else {
+				rv = ((scrollTop - partStart) / partArea) * (value[1] - value[0]) + value[0];
+			}
+		}
 
-	// 		prevPercent = percent;
-	// 	}
+		return rv;
+	};
 
-	// 	const scroll = function (e) {
-	// 		const scrollY = window.scrollY;
-	// 		const scrollTop = scrollY - wrapTop;
-	// 		const moveArea = wrapHeight - wh;
-	// 		percent = scrollTop / moveArea;
 
-	// 		if ( !chk.on && scrollY > wrapTop - wh && scrollY < wrapTop + wrapHeight ) {
-	// 			on();
-	// 		}
-	// 		if ( !chk.off && scrollY < wrapTop - wh || scrollY > wrapTop + wrapHeight ) {
-	// 			off();
-	// 		}
-			
-	// 		if ( percent > 1.1 || percent < -0.1 ) return false;
-	// 		options.scroll(percent);
-	// 	}
 
-	// 	const resize = function () {
-	// 		options.resize();
-	// 		scroll();
-	// 	}
-
-	// 	init();
-	// }
 
     App();
 

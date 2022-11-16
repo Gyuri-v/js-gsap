@@ -253,6 +253,110 @@ table {
   opacity: 1;
 }
 
+.section-blur {
+  position: relative;
+  z-index: 2;
+  height: 500vh;
+}
+.section-blur .title-wrap {
+  padding: 100px;
+}
+.section-blur .title-wrap .title {
+  font-size: 150px;
+  font-weight: 700;
+  color: transparent;
+  text-align: center;
+  -webkit-text-stroke: 2px #fff;
+}
+.section-blur .item-wrap {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  transform: translate3d(-50%, -50%, 0);
+  perspective: 200px;
+}
+.section-blur .item-wrap .item {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transform-origin: center;
+  transition: transform 0.2s ease-out;
+  transform-style: preserve-3d;
+}
+.section-blur .item-wrap .item-1 {
+  z-index: 4;
+  transform: translate3d(0, 0, 0);
+}
+.section-blur .item-wrap .item-2 {
+  z-index: 3;
+  transform: translate3d(0, 0, -200px);
+}
+.section-blur .item-wrap .item-3 {
+  z-index: 2;
+  transform: translate3d(0, 0, -400px);
+}
+.section-blur .img-wrap {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+.section-blur .img-wrap .img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: transform 3s cubic-bezier(0.06, 0.83, 0.1, 1);
+}
+.section-blur .img-wrap .img-2 {
+  position: relative;
+}
+.section-blur .img-wrap .img img {
+  max-width: 100%;
+}
+.section-blur .img-wrap .img video {
+  max-width: 100%;
+}
+
+.section-movie {
+  position: relative;
+  z-index: 1;
+  height: 400vh;
+  margin-top: -100vh;
+}
+.section-movie .sticky-wrap {
+  overflow: visible;
+}
+.section-movie .title-wrap {
+  padding: 100px;
+}
+.section-movie .title-wrap .title {
+  font-size: 150px;
+  font-weight: 700;
+  color: transparent;
+  text-align: center;
+  -webkit-text-stroke: 2px #fff;
+}
+.section-movie .video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.section-movie .video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.section-movie .video-wrap.fix {
+  position: fixed;
+}
+
 .section-lottie {
   height: 400vh;
   background-color: #000;
