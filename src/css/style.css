@@ -97,6 +97,7 @@ table {
   width: 100%;
   height: 100%;
   transform-origin: center;
+  transition-timing-function: ease-in-out;
 }
 .section-gsap .sticky-wrap .bg-fave {
   background: url("../../assets/images/gsap_bg-fave.jpeg") no-repeat center center/100vw;
@@ -122,6 +123,7 @@ table {
 }
 .section-gsap .title-wrap {
   padding: 100px;
+  transition-timing-function: ease-out;
 }
 .section-gsap .title-wrap .title {
   position: relative;
@@ -143,14 +145,17 @@ table {
   letter-spacing: -1px;
 }
 .section-gsap .content-wrap .box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   position: absolute;
   width: 300px;
   height: 300px;
-  background: #fff;
   margin: -150px 0 0 -150px;
+}
+.section-gsap .content-wrap .box .box-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
   padding: 40px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
 }
@@ -166,34 +171,40 @@ table {
   font-size: 72px;
 }
 .section-gsap .content-wrap .box-1 {
-  background-color: #aaa;
   top: 50%;
   left: 45%;
+}
+.section-gsap .content-wrap .box-1 .box-inner {
+  background-color: #aaa;
   transform: rotate(-5deg);
 }
 .section-gsap .content-wrap .box-2 {
-  background-color: #222;
   top: 50%;
   left: 55%;
+}
+.section-gsap .content-wrap .box-2 .box-inner {
+  background-color: #222;
   transform: rotate(10deg);
 }
 .section-gsap .content-wrap .box-2 .txt {
   color: #fff;
 }
 .section-gsap .content-wrap .box-3 {
-  background-color: #f5f5f5;
   top: 50%;
   left: 48%;
+}
+.section-gsap .content-wrap .box-3 .box-inner {
+  background-color: #f5f5f5;
   transform: rotate(-10deg);
 }
 .section-gsap .content-wrap .box-4 {
-  background-color: #000;
   top: 50%;
   left: 50%;
-  transform: rotate(0);
-  display: flex;
+}
+.section-gsap .content-wrap .box-4 .box-inner {
   justify-content: center;
   align-items: center;
+  background-color: #000;
 }
 .section-gsap .content-wrap .box-4 .txt {
   font-size: 50px;
@@ -245,9 +256,6 @@ table {
   height: 100%;
   background: url("../../assets/images/timeline-bg.jpg") no-repeat center/100vw;
   opacity: 0;
-}
-.section-timeline.active .title {
-  opacity: 1;
 }
 .section-timeline.active .bg {
   opacity: 1;
@@ -380,7 +388,8 @@ table {
 }
 
 .section-lottie {
-  height: 400vh;
+  height: 500vh;
+  margin-top: -100vh;
   background-color: #000;
   transition: background 0.2s;
 }
@@ -394,6 +403,7 @@ table {
   font-size: 150px;
   font-weight: 700;
   white-space: nowrap;
+  line-height: 1.2;
   transition: background 0.2s;
 }
 .section-lottie .title-wrap .title .title_inner {
@@ -410,14 +420,6 @@ table {
 .section-lottie .title-wrap .title span:nth-child(2n) {
   color: transparent;
   -webkit-text-stroke: 2px #fff;
-}
-@keyframes lottieTitle {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-100%, 0, 0);
-  }
 }
 .section-lottie .lottie {
   position: absolute;
@@ -453,6 +455,23 @@ table {
   right: 300px;
   width: 300px;
 }
+.section-lottie .sprite {
+  overflow: hidden;
+  position: absolute;
+  bottom: 50px;
+  left: -180px;
+  z-index: 9;
+  width: 180px;
+  height: 300px;
+  background: url("../../assets/sprite/lottie_person.png") no-repeat left center;
+  background-size: cover;
+  animation: spriteAnimation 1.5s steps(9) infinite;
+}
+@keyframes spriteAnimation {
+  100% {
+    background-position: -1620px;
+  }
+}
 .section-lottie.active {
   background-color: #fff;
 }
@@ -461,6 +480,14 @@ table {
 }
 .section-lottie.on .title-wrap .title_inner {
   animation: lottieTitle 20s linear infinite;
+}
+@keyframes lottieTitle {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
 }
 
 .section-horizontal {

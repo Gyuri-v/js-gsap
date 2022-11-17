@@ -33,6 +33,7 @@
         .bg{
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1;
             width: 100%; height: 100%; transform-origin: center;
+            transition-timing-function: ease-in-out;
 
             &-fave{ background: url('../../assets/images/gsap_bg-fave.jpeg') no-repeat center center / 100vw; } 
             &-forest{ background: url('../../assets/images/gsap_bg-forest.jpg') no-repeat center center / 100vw; } 
@@ -49,6 +50,7 @@
 
     .title-wrap{
         padding: 100px;
+        transition-timing-function: ease-out;
 
         .title{
             position: relative;
@@ -65,21 +67,25 @@
     }
     .content-wrap{
         .box{
-            display: flex; flex-direction: column; justify-content: space-between;
-            position: absolute; width: 300px; height: 300px; background: #fff; margin: -150px 0 0 -150px; padding: 40px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
-
+            position: absolute; width: 300px; height: 300px; margin: -150px 0 0 -150px;
+            
+            .box-inner{ display: flex; flex-direction: column; justify-content: space-between; width: 100%; height: 100%; padding: 40px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7); }
             .txt{ display: block; font-size: 36px; font-weight: 700; color: #000; line-height: 1.3; }
             .icon{ display: block; font-size: 72px; }
             
-            &-1{ background-color: #aaa; top: 50%; left: 45%; transform: rotate(-5deg); }
-            &-2{ background-color: #222; top: 50%; left: 55%; transform: rotate(10deg); 
+            &-1{ top: 50%; left: 45%; 
+                .box-inner{ background-color: #aaa;  transform: rotate(-5deg); }
+            }
+            &-2{ top: 50%; left: 55%; 
+                .box-inner{ background-color: #222; transform: rotate(10deg); }
                 .txt{ color: #fff; }
             }
-            &-3{ background-color: #f5f5f5; top: 50%; left: 48%; transform: rotate(-10deg); 
+            &-3{ top: 50%; left: 48%; 
+                .box-inner{ background-color: #f5f5f5; transform: rotate(-10deg); }
             }
-            &-4{ background-color: #000; top: 50%; left: 50%; transform: rotate(0); 
-                display: flex; justify-content: center; align-items: center;
+            &-4{ top: 50%; left: 50%; 
+                
+                .box-inner{ justify-content: center; align-items: center; background-color: #000; }
                 .txt{ font-size: 50px; text-align: center; color: #fff; }
             }
         }
@@ -96,7 +102,7 @@
 
     .title-wrap{
         position: absolute; top: 50%; left: 50%; transform: translate3d(-50%, -50%, 0); z-index: 3;
-        text-align: center;
+        text-align: center; 
         .title{ 
             position: relative; 
             opacity: 0;
@@ -117,7 +123,6 @@
     }
 
     &.active{
-        .title{ opacity: 1; }
         .bg{ opacity: 1; }
         // .sticky-wrap{
         //     position: fixed;
@@ -238,7 +243,7 @@
 
 // lottie
 .section-lottie{
-    height: 400vh;
+    height: 500vh; margin-top: -100vh;
     background-color: #000;
     transition: background 0.2s;
 
@@ -247,7 +252,7 @@
 
         .title{ 
             display: flex; position: relative; width: 100%;
-            font-size: 150px; font-weight: 700; white-space: nowrap;
+            font-size: 150px; font-weight: 700; white-space: nowrap; line-height: 1.2;
             transition: background 0.2s;
 
             .title_inner{
@@ -263,11 +268,6 @@
         }
     }
 
-    @keyframes lottieTitle {
-        0%{ transform: translate3d(0, 0, 0); }
-        100%{ transform: translate3d(-100%, 0, 0); }
-    }
-
     .lottie{ 
         position: absolute;
         
@@ -278,6 +278,21 @@
         &-5{ z-index: 2; bottom: 100px; right: 300px; width: 300px; }
     }
 
+    .sprite{
+        overflow: hidden;
+        position: absolute; bottom: 50px; left: -180px; z-index: 9;
+        width: 180px; height: 300px;
+        
+        background: url('../../assets/sprite/lottie_person.png') no-repeat left center;
+        background-size: cover;
+
+        animation: spriteAnimation 1.5s steps(9) infinite;
+    }
+
+    @keyframes spriteAnimation {
+        100%{ background-position: -1620px; }
+    }
+
     &.active{ 
         background-color: #fff;
         .title-wrap .title{ background-color: #fff; }
@@ -285,6 +300,11 @@
 
     &.on{ 
         .title-wrap .title_inner{ animation: lottieTitle 20s linear infinite; } 
+    }
+
+    @keyframes lottieTitle {
+        0%{ transform: translate3d(0, 0, 0); }
+        100%{ transform: translate3d(-100%, 0, 0); }
     }
 }
 

@@ -1,5 +1,7 @@
 (function () {
 
+	// 소스 정리는 못했습니당.. ㅠ_ㅠ 
+
 	let ww = window.innerWidth;
 	let wh = window.innerHeight;
     
@@ -37,132 +39,42 @@
             });
 			
 		}
-		gsap.fromTo($gsapBox1, {
-			y: "100vh",
-		},{
-			y: "-100vh",
-			ease: 'power0.easeNone',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '10%',
-				end: '60%',
-				scrub: true,
+
+		
+		scroller( $gsapSection, {
+            scroll: function (e) {
+				// window.getComputedStyle( $horizontalSticky, null ).getPropertyValue('padding-left') )
+				$gsapBox1.style.transform = `translate3d( 0, ${calcValue([0, 0.5], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
+				$gsapBgFave.style.opacity = calcValue([0.2, 0.3], [0, 1], e.scrollTop, e.moveArea);
+				$gsapBgFave.style.clipPath = `polygon(
+					${calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea)}%, 
+					${calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea)}%, 
+					${calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea)}%, 
+					${calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea)}%
+				)`;
+				$gsapBox2.style.transform = `translate3d( 0, ${calcValue([0.1, 0.6], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
+				$gsapBgForest.style.opacity = calcValue([0.3, 0.4], [0, 1], e.scrollTop, e.moveArea);
+				$gsapBgForest.style.clipPath = `polygon(
+					${calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea)}%, 
+					${calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea)}%, 
+					${calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea)}%, 
+					${calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea)}%
+				)`;
+				$gsapBox3.style.transform = `translate3d( 0, ${calcValue([0.2, 0.7], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
+				$gsapBgOrange.style.opacity = calcValue([0.4, 0.5], [0, 1], e.scrollTop, e.moveArea);
+				$gsapBgOrange.style.clipPath = `polygon(
+					${calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea)}%, 
+					${calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea)}%, 
+					${calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea)}%, 
+					${calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea)}%
+				)`;
+				$gsapBox4.style.transform = `translate3d( 0, ${calcValue([0.4, 0.75], [wh, 0], e.scrollTop, e.moveArea)}px, 0)`;
+				$gsapTitleWrap.style.opacity = calcValue([0.7, 0.8], [1, 0], e.scrollTop, e.moveArea);
+				$gsapBgLast.style.opacity = calcValue([0.8, 0.9], [0, 1], e.scrollTop, e.moveArea);
+				$gsapBox4Text.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
 			}
-		});
-		gsap.fromTo($gsapBgFave, {
-			opacity: 0,
-			clipPath: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
-		},{
-			opacity: 1,
-			clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-			ease: 'ease.inOut',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '20%',
-				end: '25%',
-				scrub: true,
-			}
-		});
-		gsap.fromTo($gsapBox2, {
-			y: "100vh",
-		},{
-			y: "-100vh",
-			ease: 'power0.easeNone',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '20%',
-				end: '70%',
-				scrub: true,
-			}
-		});
-		gsap.fromTo($gsapBgForest, {
-			opacity: 0,
-			clipPath: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
-		},{
-			opacity: 1,
-			clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-			ease: 'ease.inOut',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '30%',
-				end: '35%',
-				scrub: true,
-			}
-		});
-		gsap.fromTo($gsapBox3, {
-			y: "100vh",
-		},{
-			y: "-100vh",
-			ease: 'power0.easeNone',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '30%',
-				end: '80%',
-				scrub: true,
-			}
-		});
-		gsap.fromTo($gsapBgOrange, {
-			opacity: 0,
-			clipPath: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
-		},{
-			opacity: 1,
-			clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-			ease: 'ease.inOut',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '40%',
-				end: '45%',
-				scrub: true,
-			}
-		});
-		gsap.fromTo($gsapBox4, {
-			y: "100vh",
-		},{
-			y: "0",
-			ease: 'power0.easeNone',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '50%',
-				end: '75%',
-				scrub: true,
-			}
-		});
-		gsap.fromTo($gsapTitleWrap, {
-			opacity: 1,
-		},{
-			opacity: 0,
-			ease: 'circ.easeOut',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '70%',
-				end: '75%',
-				scrub: true,
-			}
-		});
-		gsap.fromTo($gsapBox4Text, {
-			opacity: 1,
-		},{
-			opacity: 0,
-			ease: 'circ.easeOut',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '70%',
-				end: '75%',
-				scrub: true,
-			}
-		});
-		gsap.fromTo($gsapBgLast, {
-			opacity: 0,
-		},{
-			opacity: 1,
-			ease: 'ease.inOut',
-			scrollTrigger: {
-				trigger: $gsapSection,
-				start: '75%',
-				end: '80%',
-				scrub: true,
-			}
-		});
+        });
+
 		ScrollTrigger.create({
 			trigger: $gsapSection,
 			scrub: 1,
@@ -192,6 +104,7 @@
 		$timelineBgWrap.style.clipPath = `polygon(${bgx1}% ${bgy1}%, ${bgx2}% ${bgy1}%, ${bgx2}% ${bgy2}%, ${bgx1}% ${bgy2}%)`;
 		
         const timelineTween = gsap.timeline({ paused: true }); 
+        timelineTween.to( $timelineTitle,   { opacity: 1, duration: 1} );
         timelineTween.to( $timelineBgImage, { opacity: 1, duration: 1} );
         timelineTween.to( $timelineBgWrap,  { clipPath: `polygon(${bgx1}% 0%, ${bgx2}% 0%, ${bgx2}% 100%, ${bgx1}% 100%)`, duration: 1} );
         timelineTween.to( $timelineBgWrap,  { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1} );
@@ -265,74 +178,63 @@
 				$blurItems[1].style.opacity = calcValue([0.55, 0.6], [1, 0], e.scrollTop, e.moveArea);
 				$blurItems[2].style.opacity = calcValue([0.85, 0.9], [1, 0], e.scrollTop, e.moveArea);
 
-				$movieCanvasWrap.style.opacity = calcValue([0.75, 1], [0, 1], e.scrollTop, e.moveArea);
-
 				$blurTitleWrap.style.transform = `translate3d(0, ${calcValue([0.9, 1], [0, -100], e.scrollTop, e.moveArea)}px, 0)`;
 				$blurTitle.style.transform = `translate3d(0, ${calcValue([0.9, 1], [0, -100], e.scrollTop, e.moveArea)}px, 0)`;
 				$blurTitleWrap.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
 				$blurTitle.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
-				$movieTitleWrap.style.opacity = calcValue([0.9, 1], [0, 1], e.scrollTop, e.moveArea);
-
-				if ( !$movieCanvasWrap.classList.contains('fix') && e.percent > 0.75 && e.percent < 1 ) {
-					$movieCanvasWrap.classList.add('fix');
-				}
 			}
 		});
 
-			
+
 
         // movie
         const $movieSection = container.querySelector('.section-movie');
 		const $movieStickyWrap = $movieSection.querySelector('.sticky-wrap');
 		const $movieTitleWrap = $movieSection.querySelector('.title-wrap');
-		const $movieVideoWrap = $movieSection.querySelector('.video-wrap');
-		const $movieVideo = $movieSection.querySelector('video');
-
-		let movieVideoDuration = 0;
-		
-		$movieVideo.addEventListener('canplay', function () {
-			movieVideoDuration = $movieVideo.duration;
-		});
-
 		const $movieCanvasWrap = $movieSection.querySelector('.canvas-wrap');
 		const $movieCanvas = $movieSection.querySelector('canvas');
 		const movieContext = $movieCanvas.getContext('2d');
 		const movieVideoImages = [];
 		const movieVideoCount = 82;
+		
+		let movieSequenceHeight = 0;
 
 		$movieCanvas.style.width = ww + 'px';
 		$movieCanvas.style.height = wh + 'px';
 
-		const movieSetSuqences = (function () {
+		const movieSetSuqences = function () {
 			let imgElem;
 			let num;
+
 			for (let i = 0; i < movieVideoCount; i++) {
 				imgElem = new Image();
 				num = String(i + 1).length < 3 ? new Array(3 - String(i + 1).length + 1).join("0") + (i + 1) : String(i + 1);
-				imgElem.src = `../assets/video/movies2/ezgif-frame-${num}.jpg`;
+				imgElem.src = `../assets/video/movies/ezgif-frame-${num}.jpg`;
 				movieVideoImages.push(imgElem);
 			}
-		})();
-		let sequenceHeight = ww / movieVideoImages[0].width * movieVideoImages[0].height;
-		window.addEventListener('load', function () {
-			movieContext.drawImage(movieVideoImages[0], 0, 0, ww, sequenceHeight);
-		})
 
+			movieSequenceHeight = ww / movieVideoImages[0].width * movieVideoImages[0].height;
+			movieContext.drawImage(movieVideoImages[0], 0, 0, ww, movieSequenceHeight);
+		};
+
+		movieSetSuqences();
 		scroller( $movieSection, {
-			on: function (e) {
-			}, 
-			off: function (e) {
+			off: function () {
+				$movieCanvasWrap.classList.remove('fix');
 			},
             scroll: function (e) {
-				// movieTargetTime = Math.max(0.2, Math.min(movieVideoDuration - 0.2, e.percent * movieVideoDuration));
-				// $movieVideo.currentTime = movieTargetTime;
-				let sequence = Math.max(0, Math.round( e.percent * movieVideoCount ));
-				sequenceHeight = ww / movieVideoImages[sequence].width * movieVideoImages[sequence].height;
-				movieContext.drawImage(movieVideoImages[sequence], 0, 0, ww, sequenceHeight);
-
-				if ( e.percent > 0 && $movieCanvasWrap.classList.contains('fix') ) {
+				let beforeActiveArea =  -wh / e.moveArea;
+				if ( e.percent > beforeActiveArea && e.percent < 0.2  ) {
+					$movieCanvasWrap.classList.add('fix');
+					$movieCanvasWrap.style.opacity = calcValue([beforeActiveArea, 0], [0, 1], e.scrollTop, e.moveArea);
+					$movieTitleWrap.style.opacity = calcValue([-0.05, 0], [0, 1], e.scrollTop, e.moveArea);
+				} else if ( e.percent > 1 ) {
 					$movieCanvasWrap.classList.remove('fix');
-				} 
+					movieContext.drawImage(movieVideoImages[movieVideoCount - 1], 0, 0, ww, movieSequenceHeight);
+				}
+	
+				let sequence = Math.min(movieVideoCount - 1, Math.max(0, Math.round( e.percent * movieVideoCount )));
+				movieContext.drawImage(movieVideoImages[sequence], 0, 0, ww, movieSequenceHeight);
 			}
         });
 
@@ -346,6 +248,7 @@
 		const $lottieBox3 = $lottieSection.querySelector('.sticky-wrap .lottie-3');
 		const $lottieBox4 = $lottieSection.querySelector('.sticky-wrap .lottie-4');
 		const $lottieBox5 = $lottieSection.querySelector('.sticky-wrap .lottie-5');
+		const $lottieSprite1 = $lottieSection.querySelector('.sticky-wrap .sprite-1');
 
         const lottieAnimation1 = lottie.loadAnimation({
             container: $lottieBox1,
@@ -384,6 +287,8 @@
         });
 		scroller( $lottieSection, {
             scroll: function (e) {
+				$lottieSprite1.style.transform =  `translate3d(${calcValue([0, 0.8], [0, ww], e.scrollTop, e.moveArea)}px, 0, 0)`;
+
 				lottieAnimation1.goToAndStop(e.percent * (lottieAnimation1.totalFrames - 1), true);
 				lottieAnimation2.goToAndStop(e.percent * (lottieAnimation2.totalFrames - 1), true);
 				lottieAnimation3.goToAndStop(e.percent * (lottieAnimation3.totalFrames - 1), true);
@@ -391,27 +296,6 @@
 				lottieAnimation5.goToAndStop(e.percent * (lottieAnimation5.totalFrames - 1), true);
 			}
         });
-		// ScrollTrigger.create({
-		// 	trigger: $lottieSection,
-		// 	scrub: true,
-		// 	start: '0%',
-		// 	end: '50%',
-        //     onEnter: function () {
-        //         $lottieSection.classList.add('active');
-        //         $lottieSection.classList.add('on');
-        //     },
-        //     onLeaveBack: function () {
-        //         $lottieSection.classList.remove('active');
-        //         $lottieSection.classList.remove('on');
-        //     },
-		// 	onUpdate: function(self) {
-		// 		lottieAnimation1.goToAndStop(self.progress * (lottieAnimation1.totalFrames - 1), true);
-		// 		lottieAnimation2.goToAndStop(self.progress * (lottieAnimation2.totalFrames - 1), true);
-		// 		lottieAnimation3.goToAndStop(self.progress * (lottieAnimation3.totalFrames - 1), true);
-		// 		lottieAnimation4.goToAndStop(self.progress * (lottieAnimation4.totalFrames - 1), true);
-		// 		lottieAnimation5.goToAndStop(self.progress * (lottieAnimation5.totalFrames - 1), true);
-		// 	}
-		// });
 
         // horizontal-wrap
         // horizontal
@@ -425,52 +309,21 @@
 			parseInt(window.getComputedStyle( $horizontalSticky, null ).getPropertyValue('padding-left') ) + 
 			parseInt(window.getComputedStyle( $horizontalSticky, null ).getPropertyValue('padding-right') );
         const horizontalScrollValue = ww - $horizontalScroll.scrollWidth - horizontalStickyPadding;
-		gsap.to($horizontalScroll, {
-			x: horizontalScrollValue,
-			ease: 'linear',
-			scrollTrigger: {
-				trigger: $horizontalSection,
-				start: 'top top',
-				end: 'bottom bottom',
-				scrub: true,
-			},
-		});
-		gsap.to($horizontalImage1, {
-			x: -500,
-			ease: 'linear',
-			scrollTrigger: {
-				trigger: $horizontalSection,
-				start: 'top top',
-				end: 'bottom bottom',
-				scrub: true,
-			},
-		});
-		gsap.to($horizontalImage2, {
-			x: -600,
-			ease: 'linear',
-			scrollTrigger: {
-				trigger: $horizontalSection,
-				start: 'top top',
-				end: 'bottom bottom',
-				scrub: true,
-			},
-		});
-		gsap.to($horizontalIconGood, {
-			x: 200,
-			ease: 'linear',
-			scrollTrigger: {
-				trigger: $horizontalSection,
-				start: 'top top',
-				end: 'bottom bottom',
-				scrub: true,
-			},
-		});
 
+		scroller( $horizontalSection, {
+            scroll: function (e) {
+				$horizontalScroll.style.transform = `translate3d(${calcValue([0, 1], [0, horizontalScrollValue], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$horizontalImage1.style.transform = `translate3d(${calcValue([0, 1], [0, -500], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$horizontalImage2.style.transform = `translate3d(${calcValue([0, 1], [0, -600], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$horizontalIconGood.style.transform = `translate3d(${calcValue([0, 1], [0, 200], e.scrollTop, e.moveArea)}px, 0, 0)`;
+			}
+        });
     }
 
 
 	const scroller = function ( selector, options ) {
         let $wrap;
+		let scrollValue = {};
 
         const init = function () {
             $wrap = typeof selector == "string" ? document.querySelector(selector) : selector;
@@ -509,6 +362,7 @@
             options.off();
 
 			$wrap.classList.remove('on');
+			$wrap.classList.remove('active');
 			window.removeEventListener('scroll', scroll);
         }
 
@@ -516,7 +370,8 @@
             const scrollTop = window.scrollY - selector.offsetTop;
             const moveArea = selector.getBoundingClientRect().height - window.innerHeight;
             const percent = scrollTop / moveArea;
-			const result = {
+
+			scrollValue = {
 				scrollTop,
 				moveArea,
 				percent,
@@ -528,7 +383,7 @@
 				$wrap.classList.remove('active');
 			}
 
-            options.scroll(result);
+            options.scroll(scrollValue);
         }
 
         const resize = function () {
@@ -572,10 +427,5 @@
 		return rv;
 	};
 
-
-
-
-    App();
-
-
+	App();
 })();
