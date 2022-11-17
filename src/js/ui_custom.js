@@ -195,7 +195,7 @@
 		const $movieCanvas = $movieSection.querySelector('canvas');
 		const movieContext = $movieCanvas.getContext('2d');
 		const movieVideoImages = [];
-		const movieVideoCount = 82;
+		const movieVideoCount = 170;
 		
 		let movieSequenceHeight = 0;
 
@@ -209,7 +209,7 @@
 			for (let i = 0; i < movieVideoCount; i++) {
 				imgElem = new Image();
 				num = String(i + 1).length < 3 ? new Array(3 - String(i + 1).length + 1).join("0") + (i + 1) : String(i + 1);
-				imgElem.src = `../assets/video/movies/ezgif-frame-${num}.jpg`;
+				imgElem.src = `../assets/video/movies2/ezgif-frame-${num}.jpg`;
 				movieVideoImages.push(imgElem);
 			}
 
