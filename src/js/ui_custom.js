@@ -199,19 +199,7 @@
         timelineTween.to( $timelineBgImage, { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1}, 'timelineBoth' );
         timelineTween.to( $timelineTitleWrap, { top: "20%", duration: 1}, 'timelineBoth' );
         timelineTween.to( $timelineTitle,   { color: 'transparent', textStroke: '0.5px #fff', duration: 1} );
-		// ScrollTrigger.create({
-		// 	animation: timelineTween,
-		// 	trigger: $timelineSection,
-		// 	scrub: true,
-		// 	start: 'top top',
-		// 	end: 'bottom bottom',
-        //     onEnter: function () {
-        //         $timelineSection.classList.add('active');
-        //     },
-        //     onLeaveBack: function () {
-        //         $timelineSection.classList.remove('active');
-        //     },
-		// });
+
 		scroller( $timelineSection, {
 			on: function () { 
 				$timelineSection.classList.add('active'); 
@@ -225,7 +213,8 @@
 
 		// blur
         const $blurSection = container.querySelector('.section-blur');
-        const $blurTitle = $blurSection.querySelector('.title-wrap');
+        const $blurTitleWrap = $blurSection.querySelector('.title-wrap');
+        const $blurTitle = $blurSection.querySelector('.title');
         const $blurItems = $blurSection.querySelectorAll('.item');
 		const $blurImages = $blurSection.querySelectorAll('.img');
 		
@@ -242,27 +231,29 @@
 			delta.y += (position.y - delta.y) * easeFactor;
 
 			if ( blurPercent < 0.3 ) {
-				// $blurImages[0].style.transform = `translate3d(${position.x * -0.02}px, ${position.y * -0.02}px, 0)`; 
 				$blurImages[1].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
 				$blurImages[2].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`; 
 			} else if ( blurPercent < 0.6 ) {
-				// $blurImages[3].style.transform = `translate3d(${position.x * -0.02}px, ${position.y * -0.02}px, 0)`; 
 				$blurImages[4].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
 				$blurImages[5].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`; 
 			} else if ( blurPercent < 0.9 ) {
-				// $blurImages[6].style.transform = `translate3d(${position.x * -0.02}px, ${position.y * -0.02}px, 0)`; 
 				$blurImages[7].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
 				$blurImages[8].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`;
 			}
 		};
-		window.addEventListener('mousemove', setPostion);
 
 		scroller( $blurSection , {
 			on: function () {
-				//
+				window.addEventListener('mousemove', setPostion);
+			},
+			off: function () {
+				window.removeEventListener('mousemove', setPostion);
 			},
 			scroll: function(e) {
 				blurPercent = e.percent;
+
+				$blurTitle.style.webkitTextStroke = `${calcValue([0, 0.1], [2, 0], e.scrollTop, e.moveArea)}px #fff`;
+				$blurTitle.style.color = `rgba(255, 255, 255, ${calcValue([0, 0.1], [0, 1], e.scrollTop, e.moveArea)})`;
 
 				$blurItems[0].style.transform = `translate3d(${calcValue([0, 0.6], [0,  -300], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.3], [0, 200], e.scrollTop, e.moveArea)}px)`;
 				$blurItems[1].style.transform = `translate3d(${calcValue([0, 0.6], [-300,  0], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.6], [-200, 200], e.scrollTop, e.moveArea)}px)`;
@@ -274,14 +265,16 @@
 				$blurItems[1].style.opacity = calcValue([0.55, 0.6], [1, 0], e.scrollTop, e.moveArea);
 				$blurItems[2].style.opacity = calcValue([0.85, 0.9], [1, 0], e.scrollTop, e.moveArea);
 
-				$movieVideoWrap.style.opacity = calcValue([0.75, 1], [0, 1], e.scrollTop, e.moveArea);
+				$movieCanvasWrap.style.opacity = calcValue([0.75, 1], [0, 1], e.scrollTop, e.moveArea);
 
+				$blurTitleWrap.style.transform = `translate3d(0, ${calcValue([0.9, 1], [0, -100], e.scrollTop, e.moveArea)}px, 0)`;
 				$blurTitle.style.transform = `translate3d(0, ${calcValue([0.9, 1], [0, -100], e.scrollTop, e.moveArea)}px, 0)`;
+				$blurTitleWrap.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
 				$blurTitle.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
 				$movieTitleWrap.style.opacity = calcValue([0.9, 1], [0, 1], e.scrollTop, e.moveArea);
 
-				if ( !$movieVideoWrap.classList.contains('fix') && e.percent > 0.75 ) {
-					$movieVideoWrap.classList.add('fix');
+				if ( !$movieCanvasWrap.classList.contains('fix') && e.percent > 0.75 && e.percent < 1 ) {
+					$movieCanvasWrap.classList.add('fix');
 				}
 			}
 		});
@@ -294,26 +287,52 @@
 		const $movieTitleWrap = $movieSection.querySelector('.title-wrap');
 		const $movieVideoWrap = $movieSection.querySelector('.video-wrap');
 		const $movieVideo = $movieSection.querySelector('video');
-		let movieVideoDuration = 0;
 
+		let movieVideoDuration = 0;
+		
 		$movieVideo.addEventListener('canplay', function () {
 			movieVideoDuration = $movieVideo.duration;
 		});
 
+		const $movieCanvasWrap = $movieSection.querySelector('.canvas-wrap');
+		const $movieCanvas = $movieSection.querySelector('canvas');
+		const movieContext = $movieCanvas.getContext('2d');
+		const movieVideoImages = [];
+		const movieVideoCount = 82;
+
+		$movieCanvas.style.width = ww + 'px';
+		$movieCanvas.style.height = wh + 'px';
+
+		const movieSetSuqences = (function () {
+			let imgElem;
+			let num;
+			for (let i = 0; i < movieVideoCount; i++) {
+				imgElem = new Image();
+				num = String(i + 1).length < 3 ? new Array(3 - String(i + 1).length + 1).join("0") + (i + 1) : String(i + 1);
+				imgElem.src = `../assets/video/movies2/ezgif-frame-${num}.jpg`;
+				movieVideoImages.push(imgElem);
+			}
+		})();
+		let sequenceHeight = ww / movieVideoImages[0].width * movieVideoImages[0].height;
+		window.addEventListener('load', function () {
+			movieContext.drawImage(movieVideoImages[0], 0, 0, ww, sequenceHeight);
+		})
+
 		scroller( $movieSection, {
-			on: function () { 
-				$movieSection.classList.add('active'); 
-			},
-			off: function () { 
-				$movieSection.classList.remove('active'); 
+			on: function (e) {
+			}, 
+			off: function (e) {
 			},
             scroll: function (e) {
-				const movieTime = Math.max(0.2, Math.min(movieVideoDuration - 0.2, e.percent * movieVideoDuration));
-				$movieVideo.currentTime = movieTime;
+				// movieTargetTime = Math.max(0.2, Math.min(movieVideoDuration - 0.2, e.percent * movieVideoDuration));
+				// $movieVideo.currentTime = movieTargetTime;
+				let sequence = Math.max(0, Math.round( e.percent * movieVideoCount ));
+				sequenceHeight = ww / movieVideoImages[sequence].width * movieVideoImages[sequence].height;
+				movieContext.drawImage(movieVideoImages[sequence], 0, 0, ww, sequenceHeight);
 
-				if ( e.percent > 0 && $movieVideoWrap.classList.contains('fix') ) {
-					$movieVideoWrap.classList.remove('fix');
-				}
+				if ( e.percent > 0 && $movieCanvasWrap.classList.contains('fix') ) {
+					$movieCanvasWrap.classList.remove('fix');
+				} 
 			}
         });
 
@@ -364,18 +383,7 @@
             autoplay: false,
         });
 		scroller( $lottieSection, {
-			// start: 0.25,
-			on: function () { 
-				console.log('enter');
-                $lottieSection.classList.add('active');
-                $lottieSection.classList.add('on');
-			},
-			off: function () { 
-                $lottieSection.classList.remove('active');
-                $lottieSection.classList.remove('on');
-			},
             scroll: function (e) {
-				timelineTween.progress(e) 
 				lottieAnimation1.goToAndStop(e.percent * (lottieAnimation1.totalFrames - 1), true);
 				lottieAnimation2.goToAndStop(e.percent * (lottieAnimation2.totalFrames - 1), true);
 				lottieAnimation3.goToAndStop(e.percent * (lottieAnimation3.totalFrames - 1), true);
@@ -462,11 +470,11 @@
 
 
 	const scroller = function ( selector, options ) {
-        let wrap;
+        let $wrap;
 
         const init = function () {
-            wrap = typeof selector == "string" ? document.querySelector(selector) : selector;
-            if ( !wrap ) return false;
+            $wrap = typeof selector == "string" ? document.querySelector(selector) : selector;
+            if ( !$wrap ) return false;
 
             const defaultOptions = {
                 on: function () {},
@@ -484,14 +492,15 @@
                     });
                 }
             );
-            io.observe(wrap);
+            io.observe($wrap);
         }
 
         const on = function () {
             resize();
             scroll();
             options.on();
-			
+
+			$wrap.classList.add('on');
             window.addEventListener('scroll', scroll);
         }
 
@@ -499,6 +508,7 @@
             scroll();
             options.off();
 
+			$wrap.classList.remove('on');
 			window.removeEventListener('scroll', scroll);
         }
 
@@ -506,11 +516,16 @@
             const scrollTop = window.scrollY - selector.offsetTop;
             const moveArea = selector.getBoundingClientRect().height - window.innerHeight;
             const percent = scrollTop / moveArea;
-
 			const result = {
 				scrollTop,
 				moveArea,
 				percent,
+			}
+
+			if ( percent > 0 ) {
+				$wrap.classList.add('active');
+			} else {
+				$wrap.classList.remove('active');
 			}
 
             options.scroll(result);

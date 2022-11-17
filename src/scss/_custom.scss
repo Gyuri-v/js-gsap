@@ -192,12 +192,17 @@
     
     .title-wrap{
         padding: 100px;
-        .title{ font-size: 150px; font-weight: 700; color: transparent; text-align: center; -webkit-text-stroke: 2px #fff }
+        .title{ 
+            font-size: 150px; font-weight: 700; text-align: center; 
+            color: #fff; -webkit-text-stroke: 0; 
+            transition: color 1s;
+        }
     }
 
     .video-wrap{
         position: absolute; top: 0; left: 0; z-index: -1; width: 100%; height: 100%;
         opacity: 0;
+        display: none;
 
         video{
             width: 100%; height: 100%; object-fit: cover;
@@ -205,6 +210,25 @@
 
         &.fix{
             position: fixed;
+        }
+    }
+
+    .canvas-wrap{
+        overflow: hidden;
+        position: absolute; top: 0; left: 0; z-index: -1; width: 100%; height: 100%;
+        
+        canvas{
+            width: 100%; height: 100%;
+        }
+
+        &.fix{
+            position: fixed;
+        }
+    }
+
+    &.active{
+        .title{ 
+            color: transparent; -webkit-text-stroke: 2px #fff;
         }
     }
 }
