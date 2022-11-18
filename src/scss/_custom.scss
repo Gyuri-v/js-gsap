@@ -35,9 +35,9 @@
             width: 100%; height: 100%; transform-origin: center;
             transition-timing-function: ease-in-out;
 
-            &-fave{ background: url('../../assets/images/gsap_bg-fave.jpeg') no-repeat center center / 100vw; } 
-            &-forest{ background: url('../../assets/images/gsap_bg-forest.jpg') no-repeat center center / 100vw; } 
-            &-orange{ background: url('../../assets/images/gsap_bg-orange.jpg') no-repeat center center / 100vw; } 
+            &-fave{ background: url('../../assets/images/gsap_bg-fave.jpeg') no-repeat center center / cover; } 
+            &-forest{ background: url('../../assets/images/gsap_bg-forest.jpg') no-repeat center center / cover; } 
+            &-orange{ background: url('../../assets/images/gsap_bg-orange.jpg') no-repeat center center / cover; } 
             &-last{ background-color: #000; } 
 
             &::after{
@@ -54,17 +54,18 @@
 
         .title{
             position: relative;
-            font-size: 20vh; font-weight: 700; color: transparent; text-align: left;
-            -webkit-text-stroke: 1px #fff; mix-blend-mode: difference;
 
             svg{
+                max-width: 100%;
                 path{ stroke: #fff; }
             }
         }
         .text{
-            font-size: 80px; font-weight: 600; color: #fff; line-height: 1.2; letter-spacing: -1px;
+            margin-top: 20px;
+            font-size: 75px; font-weight: 600; color: #fff; line-height: 1.1; letter-spacing: -1px;
         }
     }
+    
     .content-wrap{
         .box{
             position: absolute; width: 300px; height: 300px; margin: -150px 0 0 -150px;
@@ -118,46 +119,60 @@
         &-image{
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('../../assets/images/timeline-bg.jpg') no-repeat center / 100vw; opacity: 0;
+            background: url('../../assets/images/timeline-bg.jpg') no-repeat center / cover; opacity: 0;
         }
     }
 
-    &.active{
+    &.show{
         .bg{ opacity: 1; }
-        // .sticky-wrap{
-        //     position: fixed;
-        // }
     }
-    // &.end {
-    //     .sticky-wrap{
-    //         position: absolute;
-    //         bottom: 0;
-    //         top: auto;
-    //     }
-    // }
 }
 
 
 // blur
 .section-blur{
     position: relative; z-index: 2;
-    height: 500vh;
+    height: 500vh; text-align: center;
     
     .title-wrap{
         padding: 100px;
-        .title{ font-size: 150px; font-weight: 700; color: transparent; text-align: center; -webkit-text-stroke: 2px #fff }
+        .title{ 
+            display: inline-block;
+            overflow: hidden;
+            position: relative;
+            font-size: 150px; font-weight: 700; color: transparent; text-align: center; -webkit-text-stroke: 2px #fff;
+            
+            &_bg{
+                display: block;
+                position: absolute; top: 0; left: 0;
+                width: 600%; height: 100%;
+                background: #000; mix-blend-mode: darken;
+                opacity: 0;
+
+                &::after{
+                    content: '';
+                    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+                    background: linear-gradient(to right, #f8818b 33%, #c3e178 34%, #c3e178 66%, #7386ff 67%, #7386ff 100%);
+                }
+            }
+
+            &.color{
+                background: #000;
+                .title_bg{ opacity: 1; }
+            }
+        }
     }
 
     .item-wrap{
         position: absolute; top: 60%; left: 50%;
-        width: 800px; height: 800px;
+        width: 50vw; height: 50vw;
+        max-width: 800px; max-height: 800px;
         transform: translate3d(-50%, -50%, 0);
         perspective: 200px;
         .item{
             width: 100%; height: 100%;
             position: absolute; top: 0; transform-origin: center;
             transition: transform 0.2s ease-out; transform-style: preserve-3d;
-            // background: url('../../assets/images/blue_item1_bg.png') no-repeat center / cover;
 
             &-1{ z-index: 4; transform: translate3d(0, 0, 0); }
             &-2{ z-index: 3; transform: translate3d(0, 0, -200px); }
@@ -189,7 +204,8 @@
 // movie
 .section-movie{
     position: relative; z-index: 1;
-    height: 400vh; margin-top: -100vh;
+    height: 500vh; margin-top: -100vh;
+    transition: background 0.3s;
 
     .sticky-wrap{
         overflow: visible;
@@ -232,6 +248,8 @@
     }
 
     &.active{
+        background-color: #fff;
+        transition: background 0s;
         .title{ 
             color: transparent; -webkit-text-stroke: 2px #fff;
         }
@@ -244,8 +262,7 @@
 // lottie
 .section-lottie{
     height: 500vh; margin-top: -100vh;
-    background-color: #000;
-    transition: background 0.2s;
+    background-color: #fff;
 
     .title-wrap{
         padding: 100px 0;
@@ -253,10 +270,9 @@
         .title{ 
             display: flex; position: relative; width: 100%;
             font-size: 150px; font-weight: 700; white-space: nowrap; line-height: 1.2;
-            transition: background 0.2s;
 
             .title_inner{
-                background-color: #000; mix-blend-mode: difference;
+                background-color: #fff; mix-blend-mode: difference;
                 display: inline-flex; position: relative;
             }
 
@@ -273,30 +289,49 @@
         
         &-1{ z-index: 3; bottom: 100px; left: 50%; width: 1080px; margin-left: -540px; }
         &-2{ z-index: 1; top: -25vh; left: 0; width: 100vw; }
-        &-3{ z-index: 2; bottom: 100px; left: 200px; width: 400px; }
-        &-4{ z-index: 2; bottom: 100px; right: 100px; width: 300px; }
-        &-5{ z-index: 2; bottom: 100px; right: 300px; width: 300px; }
+        &-3{ z-index: 2; bottom: 100px; left: 15%; width: 400px; }
+        &-4{ z-index: 2; bottom: 100px; right: 20%; width: 300px; }
+        &-5{ z-index: 2; bottom: 100px; right: 12%; width: 300px; }
     }
 
     .sprite{
         overflow: hidden;
-        position: absolute; bottom: 50px; left: -180px; z-index: 9;
-        width: 180px; height: 300px;
-        
-        background: url('../../assets/sprite/lottie_person.png') no-repeat left center;
-        background-size: cover;
+        position: absolute; z-index: 9;
 
-        animation: spriteAnimation 1.5s steps(9) infinite;
+        &-1{
+            bottom: 50px; left: -180px;
+            width: 180px; height: 300px;
+            background: url('../../assets/sprite/lottie_person.png') no-repeat left center;
+            background-size: cover;
+    
+            animation: spriteAnimation1 1.5s steps(9) infinite;
+        }
+
+        &-2{
+            top: 35%; right: -134px;
+            width: 134px; height: 150px;
+            background: url('../../assets/sprite/lottie_bird.png') no-repeat left center;
+            background-size: cover;
+    
+            animation: spriteAnimation2 1s steps(6) infinite;
+        }
     }
 
-    @keyframes spriteAnimation {
+    @keyframes spriteAnimation1 {
         100%{ background-position: -1620px; }
     }
-
-    &.active{ 
-        background-color: #fff;
-        .title-wrap .title{ background-color: #fff; }
+    @keyframes spriteAnimation2 {
+        100%{ background-position: -800px; }
     }
+
+    // &.active{ 
+    //     background-color: #fff;
+    //     transition: background 0.2s;
+    //     .title-wrap .title{ 
+    //         background-color: #fff; 
+    //         transition: background 0.2s;
+    //     }
+    // }
 
     &.on{ 
         .title-wrap .title_inner{ animation: lottieTitle 20s linear infinite; } 
@@ -327,7 +362,7 @@
     .scroll-wrap{
         display: inline-block; position: relative;
         .text{ 
-            font-size: 60vh; font-weight: 600; color: #fff; letter-spacing: -2vh; white-space: nowrap;
+            font-size: 700px; font-weight: 600; color: #fff; letter-spacing: -2vh; white-space: nowrap;
         }
         .icon{
             position: absolute; font-size: 240px;
