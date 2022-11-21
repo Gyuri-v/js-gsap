@@ -175,6 +175,40 @@ const App = function () {
 			}
 		};
 
+		// const motions = {
+		//   z: { startValue: 0, endValue: 3000, startPosition: 0, endPotions: 0.8 },
+		//   blur: { startValue: 0, endValue: 60, startPosition: 0, endPotions: 0.8 },
+		// };
+	
+		// const _animate = () => {
+		//   raf = requestAnimationFrame(_animate);
+		//   cancelAnimationFrame(raf);
+	
+		//   state = false;
+	
+		//   scrollTop = Math.max(0, scrollY - sectionSlide.offsetTop);
+		//   ratio = Math.min(
+		// 	1,
+		// 	scrollTop / (sectionSlide.offsetHeight - innerHeight)
+		//   );
+	
+		//   if (ratio > 0 && ratio < 1) {
+		// 	slideList.classList.add("show");
+		//   } else if (ratio <= 0 || ratio >= 1) {
+		// 	slideList.classList.remove("show");
+		//   }
+	
+		//   for (let i = 0; i < slideItems.length; i++) {
+		// 	slideItems[i].style.transform = `perspective(500px) translate3d(0,0,${
+		// 	  -500 * i + motions.z.endValue * ratio
+		// 	}px)`;
+	
+		// 	slideItems[i].style.filter = `blur(${
+		// 	  i * 10 - motions.blur.endValue * ratio
+		// 	}px)`;
+		//   }
+		// };
+
 		scroller( $blurSection , {
 			on: function () {
 				window.addEventListener('mousemove', setPostion);
@@ -193,7 +227,7 @@ const App = function () {
 
 				$blurTitle.style.webkitTextStroke = `${calcValue([0, 0.1], [2, 0], e.scrollTop, e.moveArea)}px #fff`;
 				$blurTitle.style.color = `rgba(255, 255, 255, ${calcValue([0, 0.1], [0, 1], e.scrollTop, e.moveArea)})`;
-				$blurTitleBg.style.transform = `translate3d(${calcValue([0.1, 0.75], [$blurTitle.offsetWidth, -6 * $blurTitle.offsetWidth], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$blurTitleBg.style.transform = `translate3d(${calcValue([0.1, 0.9], [$blurTitle.offsetWidth, -6 * $blurTitle.offsetWidth], e.scrollTop, e.moveArea)}px, 0, 0)`;
 
 				if ( e.percent > 0.75 ) {
 					$blurTitle.classList.remove('color');
