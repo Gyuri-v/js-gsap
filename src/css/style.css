@@ -407,8 +407,7 @@ table {
   height: 100%;
 }
 .section-movie .canvas-wrap canvas {
-  width: 100%;
-  height: 100%;
+  position: relative;
 }
 .section-movie .canvas-wrap.fix {
   position: fixed;

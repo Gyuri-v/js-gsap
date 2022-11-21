@@ -56,28 +56,40 @@ const App = function () {
 				
 				$gsapBox1.style.transform = `translate3d( 0, ${calcValue([0, 0.5], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
 				$gsapBgFave.style.opacity = calcValue([0.2, 0.3], [0, 1], e.scrollTop, e.moveArea);
+
+				const clipValue1 = calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea, 'expo.inOut');
+				const clipValue2 = calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea, Expo.easeInOut);
 				$gsapBgFave.style.clipPath = `polygon(
-					${calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea)}%, 
-					${calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea)}%, 
-					${calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea)}%, 
-					${calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea)}%
+					${clipValue1}% ${clipValue1}%, 
+					${clipValue2}% ${clipValue1}%, 
+					${clipValue2}% ${clipValue2}%, 
+					${clipValue1}% ${clipValue2}%
 				)`;
+
 				$gsapBox2.style.transform = `translate3d( 0, ${calcValue([0.1, 0.6], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
 				$gsapBgForest.style.opacity = calcValue([0.3, 0.4], [0, 1], e.scrollTop, e.moveArea);
+
+				const clipValue3 = calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea, 'expo.inOut');
+				const clipValue4 = calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea, 'expo.inOut');
 				$gsapBgForest.style.clipPath = `polygon(
-					${calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea)}%, 
-					${calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea)}%, 
-					${calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea)}%, 
-					${calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea)}%
+					${clipValue3}% ${clipValue3}%, 
+					${clipValue4}% ${clipValue3}%, 
+					${clipValue4}% ${clipValue4}%, 
+					${clipValue3}% ${clipValue4}%
 				)`;
+
 				$gsapBox3.style.transform = `translate3d( 0, ${calcValue([0.2, 0.7], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
 				$gsapBgOrange.style.opacity = calcValue([0.4, 0.5], [0, 1], e.scrollTop, e.moveArea);
+
+				const clipValue5 = calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea, 'expo.inOut');
+				const clipValue6 = calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea, 'expo.inOut');
 				$gsapBgOrange.style.clipPath = `polygon(
-					${calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea)}%, 
-					${calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea)}%, 
-					${calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea)}% ${calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea)}%, 
-					${calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea)}%   ${calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea)}%
+					${clipValue5}% ${clipValue5}%, 
+					${clipValue6}% ${clipValue5}%, 
+					${clipValue6}% ${clipValue6}%, 
+					${clipValue5}% ${clipValue6}%
 				)`;
+
 				$gsapBox4.style.transform = `translate3d( 0, ${calcValue([0.4, 0.75], [wh, 0], e.scrollTop, e.moveArea)}px, 0)`;
 				$gsapTitleWrap.style.opacity = calcValue([0.7, 0.8], [1, 0], e.scrollTop, e.moveArea);
 				$gsapBgLast.style.opacity = calcValue([0.8, 0.9], [0, 1], e.scrollTop, e.moveArea);
@@ -101,14 +113,14 @@ const App = function () {
 		$timelineBgWrap.style.clipPath = `polygon(${bgx1}% ${bgy1}%, ${bgx2}% ${bgy1}%, ${bgx2}% ${bgy2}%, ${bgx1}% ${bgy2}%)`;
 		
 		const timelineTween = gsap.timeline({ paused: true }); 
-		timelineTween.to( $timelineTitle,   { opacity: 1, duration: 1} );
-		timelineTween.to( $timelineBgImage, { opacity: 1, duration: 1} );
-		timelineTween.to( $timelineBgWrap,  { clipPath: `polygon(${bgx1}% 0%, ${bgx2}% 0%, ${bgx2}% 100%, ${bgx1}% 100%)`, duration: 1} );
-		timelineTween.to( $timelineBgWrap,  { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1} );
-		timelineTween.to( $timelineTitle,   { scale: 3, duration: 1} );
-		timelineTween.to( $timelineBgImage, { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1}, 'timelineBoth' );
-		timelineTween.to( $timelineTitleWrap, { top: "20%", duration: 1}, 'timelineBoth' );
-		timelineTween.to( $timelineTitle,   { color: 'transparent', textStroke: '0.5px #fff', duration: 1} );
+		timelineTween.to( $timelineTitle,    { opacity: 1, duration: 1} );
+		timelineTween.to( $timelineBgImage,  { opacity: 1, duration: 1} );
+		timelineTween.to( $timelineBgWrap,   { clipPath: `polygon(${bgx1}% 0%, ${bgx2}% 0%, ${bgx2}% 100%, ${bgx1}% 100%)`, duration: 1} );
+		timelineTween.to( $timelineBgWrap,   { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1} );
+		timelineTween.to( $timelineTitle,    { scale: 3, duration: 1} );
+		timelineTween.to( $timelineBgImage,  { y: "6%", scale: 0.5, ease: 'power0.easeNone', duration: 1}, 'timelineBoth' );
+		timelineTween.to( $timelineTitleWrap,{ top: "20%", duration: 1}, 'timelineBoth' );
+		timelineTween.to( $timelineTitle,    { color: 'transparent', textStroke: '0.5px #fff', duration: 1} );
 
 		scroller( $timelineSection, {
 			scroll: function (e) { 
@@ -145,22 +157,22 @@ const App = function () {
 		let blurPercent = 0;
 
 		const setPostion = function (e) {
-			// position.x = e.clientX;
-			// position.y = e.clientY;
+			position.x = e.clientX;
+			position.y = e.clientY;
 			
-			// delta.x += (position.x - delta.x) * easeFactor;
-			// delta.y += (position.y - delta.y) * easeFactor;
+			delta.x += (position.x - delta.x) * easeFactor;
+			delta.y += (position.y - delta.y) * easeFactor;
 
-			// if ( blurPercent < 0.3 ) {
-			// 	$blurImages[1].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
-			// 	$blurImages[2].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`; 
-			// } else if ( blurPercent < 0.6 ) {
-			// 	$blurImages[5].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
-			// 	$blurImages[6].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`; 
-			// } else if ( blurPercent < 0.9 ) {
-			// 	$blurImages[9].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
-			// 	$blurImages[10].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`;
-			// }
+			if ( blurPercent < 0.3 ) {
+				$blurImages[1].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
+				$blurImages[2].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`; 
+			} else if ( blurPercent < 0.6 ) {
+				$blurImages[5].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
+				$blurImages[6].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`; 
+			} else if ( blurPercent < 0.9 ) {
+				$blurImages[9].style.transform = `translate3d(${position.x * -0.03}px, ${position.y * -0.03}px, 0)`; 
+				$blurImages[10].style.transform = `translate3d(${position.x * -0.04}px, ${position.y * -0.04}px, 0)`;
+			}
 		};
 
 		scroller( $blurSection , {
@@ -195,9 +207,9 @@ const App = function () {
 				$blurItems[1].style.transform = `translate3d(${calcValue([0, 0.6], [-300,  0], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.6], [-200, 200], e.scrollTop, e.moveArea)}px)`;
 				$blurItems[2].style.transform = `translate3d(${calcValue([0, 0.9], [300, 0], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.9], [-400, 200], e.scrollTop, e.moveArea)}px)`;
 				
-				// $blurItems[1].style.filter = `blur(${calcValue([0.27, 0.33], [20, 0], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[1].style.filter = `blur(${calcValue([0.27, 0.33], [20, 0], e.scrollTop, e.moveArea)}px)`;
 				$blurItems[0].style.opacity = calcValue([0.25, 0.3], [1, 0], e.scrollTop, e.moveArea);
-				// $blurItems[2].style.filter = `blur(${calcValue([0.57, 0.63], [20, 0], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[2].style.filter = `blur(${calcValue([0.57, 0.63], [20, 0], e.scrollTop, e.moveArea)}px)`;
 				$blurItems[1].style.opacity = calcValue([0.55, 0.6], [1, 0], e.scrollTop, e.moveArea);
 				$blurItems[2].style.opacity = calcValue([0.85, 0.9], [1, 0], e.scrollTop, e.moveArea);
 
@@ -220,13 +232,20 @@ const App = function () {
 		const movieVideoImages = [];
 		const movieVideoCount = 150;
 
-		$movieCanvas.style.width = ww + 'px';
-		$movieCanvas.style.height = wh + 'px';
+		let canvasWidth = $movieCanvas.offsetWidth;
+		let canvasHeight = $movieCanvas.offsetHeight;
+		let canvasScaleRatioW = ww / canvasWidth;
+		let canvasScaleRatioH = wh / canvasHeight;
+		let canvasScaleRatio = Math.max(canvasScaleRatioW, canvasScaleRatioH);
+		
+		$movieCanvas.style.transform = `scale(${canvasScaleRatio})`;
+		$movieCanvas.style.top = `${(wh - canvasHeight) / 2}px`;
+		$movieCanvas.style.left = `${(ww - canvasWidth) / 2}px`;
 
 		let beforeActiveArea;
 		let sequence;
 
-		const movieSetSuqences = function () {
+		const movieSetSeqences = function (e) {
 			let imgElem;
 			let num;
 
@@ -236,12 +255,20 @@ const App = function () {
 				imgElem.src = `../assets/video/movies8/ezgif-frame-${num}.jpg`;
 				movieVideoImages.push(imgElem);
 			}
-
-			movieContext.drawImage(movieVideoImages[0], 0, 0, ww, wh, 0, 0, ww, wh);
 		};
 
-		movieSetSuqences();
+		const movieSetImages = function (e) {
+			sequence = Math.min(movieVideoCount - 1, Math.max(0, Math.round( e.percent * movieVideoCount ))) || 0;
+			movieVideoImages[sequence].addEventListener('load', function () {
+				movieContext.drawImage(movieVideoImages[sequence], 0, 0);
+			});
+		}
+
+		movieSetSeqences();
 		scroller( $movieSection, {
+			on: function (e) {
+				movieSetImages(e);
+			},
 			off: function () {
 				$movieCanvasWrap.classList.remove('fix');
 			},
@@ -253,17 +280,26 @@ const App = function () {
 					$movieTitleWrap.style.opacity = calcValue([-0.05, 0], [0, 1], e.scrollTop, e.moveArea);
 				} else if ( e.percent > 1 ) {
 					$movieCanvasWrap.classList.remove('fix');
-					movieContext.drawImage(movieVideoImages[movieVideoCount - 1], 0, 0, ww, wh);
+					movieContext.drawImage(movieVideoImages[movieVideoCount - 1], 0, 0);
 				}
 
 				sequence = Math.min(movieVideoCount - 1, Math.max(0, Math.round( e.percent * movieVideoCount )));
-				movieContext.drawImage(movieVideoImages[sequence], 0, 0, ww, wh, 0, 0, ww, wh);
-				
+				movieContext.drawImage(movieVideoImages[sequence], 0, 0);
 				$movieStickyWrap.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
 			},
 			resize: function (e) {
+				canvasWidth = $movieCanvas.offsetWidth;
+				canvasHeight = $movieCanvas.offsetHeight;
+				canvasScaleRatioW = ww / canvasWidth;
+				canvasScaleRatioH = wh / canvasHeight;
+				canvasScaleRatio = Math.max(canvasScaleRatioW, canvasScaleRatioH);
+		
+				$movieCanvas.style.transform = `scale(${canvasScaleRatio})`;
+				$movieCanvas.style.top = `${(wh - canvasHeight) / 2}px`;
+				$movieCanvas.style.left = `${(ww - canvasWidth) / 2}px`;
+
 				sequence = Math.min(movieVideoCount - 1, Math.max(0, Math.round( e.percent * movieVideoCount )));
-				movieContext.drawImage(movieVideoImages[sequence], 0, 0, ww, wh, 0, 0, ww, wh);
+				movieContext.drawImage(movieVideoImages[sequence], 0, 0);
 			}
 		});
 	};
@@ -395,21 +431,25 @@ const scroller = function ( selector, options ) {
 		io.observe($wrap);
 	}
 
+	const requestScroll = function() {
+		requestAnimationFrame(scroll)
+	}
+
 	const on = function () {
 		scroll();
-		options.on();
+		options.on(scrollValue);
 
 		$wrap.classList.add('on');
-		window.addEventListener('scroll', function () { requestAnimationFrame(scroll) });
+		window.addEventListener('scroll', requestScroll);
 	}
 
 	const off = function () {
 		scroll();
-		options.off();
+		options.off(scrollValue);
 
 		$wrap.classList.remove('on');
 		$wrap.classList.remove('active');
-		window.removeEventListener('scroll', function () { requestAnimationFrame(scroll) });
+		window.removeEventListener('scroll', requestScroll);
 	}
 
 	const scroll = function (e) {
@@ -443,7 +483,7 @@ const scroller = function ( selector, options ) {
 	window.addEventListener('resize', resize);
 }
 
-const calcValue = function (step, value, scrollTop, moveArea) {
+const calcValue = function (step, value, scrollTop, moveArea, easing) {
 	let partStart;
 	let partEnd;
 	let partArea;
@@ -469,7 +509,17 @@ const calcValue = function (step, value, scrollTop, moveArea) {
 		} else if (scrollTop > partEnd) {
 			rv = value[1];
 		} else {
-			rv = ((scrollTop - partStart) / partArea) * (value[1] - value[0]) + value[0];
+			// rv = ((scrollTop - partStart) / partArea) * (value[1] - value[0]) + value[0];
+
+			rv = (scrollTop - partStart) / partArea;
+			if ( easing ) {
+				if ( typeof(easing) === 'string' ) {
+					rv = gsap.parseEase(easing)(rv);
+				} else if ( typeof(easing) === 'function' ) {
+					rv = easing(rv);
+				} 
+			}
+			rv = rv * (value[1] - value[0]) + value[0];
 		}
 	}
 
