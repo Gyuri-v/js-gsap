@@ -51,14 +51,14 @@ const App = function () {
 				for (let i = 0; i < $gsapSvgPaths.length; i++) {
 					const item = $gsapSvgPaths[i];
 					const lineLength = Math.round(item.getTotalLength());
-					item.style.strokeDashoffset = `${calcValue([0, 0.1], [lineLength, 0], e.scrollTop, e.moveArea)}px`;
+					item.style.strokeDashoffset = `${getStyleValueByStep([0, 0.1], [lineLength, 0], e.scrollTop, e.moveArea)}px`;
 				}
 				
-				$gsapBox1.style.transform = `translate3d( 0, ${calcValue([0, 0.5], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
-				$gsapBgFave.style.opacity = calcValue([0.2, 0.3], [0, 1], e.scrollTop, e.moveArea);
+				$gsapBox1.style.transform = `translate3d( 0, ${getStyleValueByStep([0, 0.5], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
+				$gsapBgFave.style.opacity = getStyleValueByStep([0.2, 0.3], [0, 1], e.scrollTop, e.moveArea);
 
-				const clipValue1 = calcValue([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea, 'expo.inOut');
-				const clipValue2 = calcValue([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea, Expo.easeInOut);
+				const clipValue1 = getStyleValueByStep([0.2, 0.3], [50, 0], e.scrollTop, e.moveArea, 'expo.inOut');
+				const clipValue2 = getStyleValueByStep([0.2, 0.3], [50, 100], e.scrollTop, e.moveArea, Expo.easeInOut);
 				$gsapBgFave.style.clipPath = `polygon(
 					${clipValue1}% ${clipValue1}%, 
 					${clipValue2}% ${clipValue1}%, 
@@ -66,11 +66,11 @@ const App = function () {
 					${clipValue1}% ${clipValue2}%
 				)`;
 
-				$gsapBox2.style.transform = `translate3d( 0, ${calcValue([0.1, 0.6], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
-				$gsapBgForest.style.opacity = calcValue([0.3, 0.4], [0, 1], e.scrollTop, e.moveArea);
+				$gsapBox2.style.transform = `translate3d( 0, ${getStyleValueByStep([0.1, 0.6], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
+				$gsapBgForest.style.opacity = getStyleValueByStep([0.3, 0.4], [0, 1], e.scrollTop, e.moveArea);
 
-				const clipValue3 = calcValue([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea, 'expo.inOut');
-				const clipValue4 = calcValue([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea, 'expo.inOut');
+				const clipValue3 = getStyleValueByStep([0.3, 0.4], [50, 0], e.scrollTop, e.moveArea, 'expo.inOut');
+				const clipValue4 = getStyleValueByStep([0.3, 0.4], [50, 100], e.scrollTop, e.moveArea, 'expo.inOut');
 				$gsapBgForest.style.clipPath = `polygon(
 					${clipValue3}% ${clipValue3}%, 
 					${clipValue4}% ${clipValue3}%, 
@@ -78,11 +78,11 @@ const App = function () {
 					${clipValue3}% ${clipValue4}%
 				)`;
 
-				$gsapBox3.style.transform = `translate3d( 0, ${calcValue([0.2, 0.7], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
-				$gsapBgOrange.style.opacity = calcValue([0.4, 0.5], [0, 1], e.scrollTop, e.moveArea);
+				$gsapBox3.style.transform = `translate3d( 0, ${getStyleValueByStep([0.2, 0.7], [wh, -wh], e.scrollTop, e.moveArea)}px, 0)`;
+				$gsapBgOrange.style.opacity = getStyleValueByStep([0.4, 0.5], [0, 1], e.scrollTop, e.moveArea);
 
-				const clipValue5 = calcValue([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea, 'expo.inOut');
-				const clipValue6 = calcValue([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea, 'expo.inOut');
+				const clipValue5 = getStyleValueByStep([0.4, 0.5], [50, 0], e.scrollTop, e.moveArea, 'expo.inOut');
+				const clipValue6 = getStyleValueByStep([0.4, 0.5], [50, 100], e.scrollTop, e.moveArea, 'expo.inOut');
 				$gsapBgOrange.style.clipPath = `polygon(
 					${clipValue5}% ${clipValue5}%, 
 					${clipValue6}% ${clipValue5}%, 
@@ -90,10 +90,10 @@ const App = function () {
 					${clipValue5}% ${clipValue6}%
 				)`;
 
-				$gsapBox4.style.transform = `translate3d( 0, ${calcValue([0.4, 0.75], [wh, 0], e.scrollTop, e.moveArea)}px, 0)`;
-				$gsapTitleWrap.style.opacity = calcValue([0.7, 0.8], [1, 0], e.scrollTop, e.moveArea);
-				$gsapBgLast.style.opacity = calcValue([0.8, 0.9], [0, 1], e.scrollTop, e.moveArea);
-				$gsapBox4Text.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
+				$gsapBox4.style.transform = `translate3d( 0, ${getStyleValueByStep([0.4, 0.75], [wh, 0], e.scrollTop, e.moveArea)}px, 0)`;
+				$gsapTitleWrap.style.opacity = getStyleValueByStep([0.7, 0.8], [1, 0], e.scrollTop, e.moveArea);
+				$gsapBgLast.style.opacity = getStyleValueByStep([0.8, 0.9], [0, 1], e.scrollTop, e.moveArea);
+				$gsapBox4Text.style.opacity = getStyleValueByStep([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
 			}
 		});
 	};
@@ -175,40 +175,6 @@ const App = function () {
 			}
 		};
 
-		// const motions = {
-		//   z: { startValue: 0, endValue: 3000, startPosition: 0, endPotions: 0.8 },
-		//   blur: { startValue: 0, endValue: 60, startPosition: 0, endPotions: 0.8 },
-		// };
-	
-		// const _animate = () => {
-		//   raf = requestAnimationFrame(_animate);
-		//   cancelAnimationFrame(raf);
-	
-		//   state = false;
-	
-		//   scrollTop = Math.max(0, scrollY - sectionSlide.offsetTop);
-		//   ratio = Math.min(
-		// 	1,
-		// 	scrollTop / (sectionSlide.offsetHeight - innerHeight)
-		//   );
-	
-		//   if (ratio > 0 && ratio < 1) {
-		// 	slideList.classList.add("show");
-		//   } else if (ratio <= 0 || ratio >= 1) {
-		// 	slideList.classList.remove("show");
-		//   }
-	
-		//   for (let i = 0; i < slideItems.length; i++) {
-		// 	slideItems[i].style.transform = `perspective(500px) translate3d(0,0,${
-		// 	  -500 * i + motions.z.endValue * ratio
-		// 	}px)`;
-	
-		// 	slideItems[i].style.filter = `blur(${
-		// 	  i * 10 - motions.blur.endValue * ratio
-		// 	}px)`;
-		//   }
-		// };
-
 		scroller( $blurSection , {
 			on: function () {
 				window.addEventListener('mousemove', setPostion);
@@ -225,9 +191,9 @@ const App = function () {
 			scroll: function(e) {
 				blurPercent = e.percent;
 
-				$blurTitle.style.webkitTextStroke = `${calcValue([0, 0.1], [2, 0], e.scrollTop, e.moveArea)}px #fff`;
-				$blurTitle.style.color = `rgba(255, 255, 255, ${calcValue([0, 0.1], [0, 1], e.scrollTop, e.moveArea)})`;
-				$blurTitleBg.style.transform = `translate3d(${calcValue([0.1, 0.9], [$blurTitle.offsetWidth, -6 * $blurTitle.offsetWidth], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$blurTitle.style.webkitTextStroke = `${getStyleValueByStep([0, 0.1], [2, 0], e.scrollTop, e.moveArea)}px #fff`;
+				$blurTitle.style.color = `rgba(255, 255, 255, ${getStyleValueByStep([0, 0.1], [0, 1], e.scrollTop, e.moveArea)})`;
+				$blurTitleBg.style.transform = `translate3d(${getStyleValueByStep([0.1, 0.9], [$blurTitle.offsetWidth, -6 * $blurTitle.offsetWidth], e.scrollTop, e.moveArea)}px, 0, 0)`;
 
 				if ( e.percent > 0.75 ) {
 					$blurTitle.classList.remove('color');
@@ -237,20 +203,20 @@ const App = function () {
 					$blurTitle.classList.remove('color');
 				}
 
-				$blurItems[0].style.transform = `translate3d(${calcValue([0, 0.6], [0,  -300], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.3], [0, 200], e.scrollTop, e.moveArea)}px)`;
-				$blurItems[1].style.transform = `translate3d(${calcValue([0, 0.6], [-300,  0], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.6], [-200, 200], e.scrollTop, e.moveArea)}px)`;
-				$blurItems[2].style.transform = `translate3d(${calcValue([0, 0.9], [300, 0], e.scrollTop, e.moveArea)}px, 0, ${calcValue([0, 0.9], [-400, 200], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[0].style.transform = `translate3d(${getStyleValueByStep([0, 0.6], [0,  -300], e.scrollTop, e.moveArea)}px, 0, ${getStyleValueByStep([0, 0.3], [0, 200], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[1].style.transform = `translate3d(${getStyleValueByStep([0, 0.6], [-300,  0], e.scrollTop, e.moveArea)}px, 0, ${getStyleValueByStep([0, 0.6], [-200, 200], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[2].style.transform = `translate3d(${getStyleValueByStep([0, 0.9], [300, 0], e.scrollTop, e.moveArea)}px, 0, ${getStyleValueByStep([0, 0.9], [-400, 200], e.scrollTop, e.moveArea)}px)`;
 				
-				$blurItems[1].style.filter = `blur(${calcValue([0.27, 0.33], [20, 0], e.scrollTop, e.moveArea)}px)`;
-				$blurItems[0].style.opacity = calcValue([0.25, 0.3], [1, 0], e.scrollTop, e.moveArea);
-				$blurItems[2].style.filter = `blur(${calcValue([0.57, 0.63], [20, 0], e.scrollTop, e.moveArea)}px)`;
-				$blurItems[1].style.opacity = calcValue([0.55, 0.6], [1, 0], e.scrollTop, e.moveArea);
-				$blurItems[2].style.opacity = calcValue([0.85, 0.9], [1, 0], e.scrollTop, e.moveArea);
+				$blurItems[1].style.filter = `blur(${getStyleValueByStep([0.27, 0.33], [20, 0], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[0].style.opacity = getStyleValueByStep([0.25, 0.3], [1, 0], e.scrollTop, e.moveArea);
+				$blurItems[2].style.filter = `blur(${getStyleValueByStep([0.57, 0.63], [20, 0], e.scrollTop, e.moveArea)}px)`;
+				$blurItems[1].style.opacity = getStyleValueByStep([0.55, 0.6], [1, 0], e.scrollTop, e.moveArea);
+				$blurItems[2].style.opacity = getStyleValueByStep([0.85, 0.9], [1, 0], e.scrollTop, e.moveArea);
 
-				$blurTitleWrap.style.transform = `translate3d(0, ${calcValue([0.9, 1], [0, -100], e.scrollTop, e.moveArea)}px, 0)`;
-				$blurTitle.style.transform = `translate3d(0, ${calcValue([0.9, 1], [0, -100], e.scrollTop, e.moveArea)}px, 0)`;
-				$blurTitleWrap.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
-				$blurTitle.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
+				$blurTitleWrap.style.transform = `translate3d(0, ${getStyleValueByStep([0.9, 1], [0, -100], e.scrollTop, e.moveArea)}px, 0)`;
+				$blurTitle.style.transform = `translate3d(0, ${getStyleValueByStep([0.9, 1], [0, -100], e.scrollTop, e.moveArea)}px, 0)`;
+				$blurTitleWrap.style.opacity = getStyleValueByStep([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
+				$blurTitle.style.opacity = getStyleValueByStep([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
 			}
 		});
 	};
@@ -310,8 +276,8 @@ const App = function () {
 				beforeActiveArea =  -wh / e.moveArea;
 				if ( e.percent > beforeActiveArea && e.percent < 0.2  ) {
 					$movieCanvasWrap.classList.add('fix');
-					$movieCanvasWrap.style.opacity = calcValue([beforeActiveArea, 0], [0, 1], e.scrollTop, e.moveArea);
-					$movieTitleWrap.style.opacity = calcValue([-0.05, 0], [0, 1], e.scrollTop, e.moveArea);
+					$movieCanvasWrap.style.opacity = getStyleValueByStep([beforeActiveArea, 0], [0, 1], e.scrollTop, e.moveArea);
+					$movieTitleWrap.style.opacity = getStyleValueByStep([-0.05, 0], [0, 1], e.scrollTop, e.moveArea);
 				} else if ( e.percent > 1 ) {
 					$movieCanvasWrap.classList.remove('fix');
 					movieContext.drawImage(movieVideoImages[movieVideoCount - 1], 0, 0);
@@ -319,7 +285,7 @@ const App = function () {
 
 				sequence = Math.min(movieVideoCount - 1, Math.max(0, Math.round( e.percent * movieVideoCount )));
 				movieContext.drawImage(movieVideoImages[sequence], 0, 0);
-				$movieStickyWrap.style.opacity = calcValue([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
+				$movieStickyWrap.style.opacity = getStyleValueByStep([0.9, 1], [1, 0], e.scrollTop, e.moveArea);
 			},
 			resize: function (e) {
 				canvasWidth = $movieCanvas.offsetWidth;
@@ -387,8 +353,8 @@ const App = function () {
 
 		scroller( $lottieSection, {
 			scroll: function (e) {
-				$lottieSprite1.style.transform =  `translate3d(${calcValue([0, 0.8], [0, ww], e.scrollTop, e.moveArea)}px, 0, 0)`;
-				$lottieSprite2.style.transform =  `translate3d(${calcValue([0, 0.8], [0, -ww-150], e.scrollTop, e.moveArea)}px, ${Math.sin(e.scrollTop * 0.005) * 100}px, 0)`;
+				$lottieSprite1.style.transform =  `translate3d(${getStyleValueByStep([0, 0.8], [0, ww], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$lottieSprite2.style.transform =  `translate3d(${getStyleValueByStep([0, 0.8], [0, -ww-150], e.scrollTop, e.moveArea)}px, ${Math.sin(e.scrollTop * 0.005) * 100}px, 0)`;
 
 				lottieAnimation1.goToAndStop(e.percent * (lottieAnimation1.totalFrames - 1), true);
 				lottieAnimation2.goToAndStop(e.percent * (lottieAnimation2.totalFrames - 1), true);
@@ -424,10 +390,10 @@ const App = function () {
 	
 		scroller( $horizontalSection, {
 			scroll: function (e) {
-				$horizontalScroll.style.transform = `translate3d(${calcValue([0, 1], [0, horizontalScrollValue], e.scrollTop, e.moveArea)}px, 0, 0)`;
-				$horizontalImage1.style.transform = `translate3d(${calcValue([0, 1], [0, -500], e.scrollTop, e.moveArea)}px, 0, 0)`;
-				$horizontalImage2.style.transform = `translate3d(${calcValue([0, 1], [0, -600], e.scrollTop, e.moveArea)}px, 0, 0)`;
-				$horizontalIconGood.style.transform = `translate3d(${calcValue([0, 1], [0, 200], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$horizontalScroll.style.transform = `translate3d(${getStyleValueByStep([0, 1], [0, horizontalScrollValue], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$horizontalImage1.style.transform = `translate3d(${getStyleValueByStep([0, 1], [0, -500], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$horizontalImage2.style.transform = `translate3d(${getStyleValueByStep([0, 1], [0, -600], e.scrollTop, e.moveArea)}px, 0, 0)`;
+				$horizontalIconGood.style.transform = `translate3d(${getStyleValueByStep([0, 1], [0, 200], e.scrollTop, e.moveArea)}px, 0, 0)`;
 			}
 		});
 	};
@@ -439,12 +405,12 @@ App();
 
 
 const scroller = function ( selector, options ) {
-	let $wrap;
+	let $selector;
 	let scrollValue = {};
 
 	const init = function () {
-		$wrap = typeof selector == "string" ? document.querySelector(selector) : selector;
-		if ( !$wrap ) return false;
+		$selector = typeof selector == "string" ? document.querySelector(selector) : selector;
+		if ( !$selector ) return false;
 
 		const defaultOptions = {
 			on: function () {},
@@ -462,7 +428,7 @@ const scroller = function ( selector, options ) {
 				});
 			}
 		);
-		io.observe($wrap);
+		io.observe($selector);
 	}
 
 	const requestScroll = function() {
@@ -473,7 +439,7 @@ const scroller = function ( selector, options ) {
 		scroll();
 		options.on(scrollValue);
 
-		$wrap.classList.add('on');
+		$selector.classList.add('on');
 		window.addEventListener('scroll', requestScroll);
 	}
 
@@ -481,8 +447,8 @@ const scroller = function ( selector, options ) {
 		scroll();
 		options.off(scrollValue);
 
-		$wrap.classList.remove('on');
-		$wrap.classList.remove('active');
+		$selector.classList.remove('on');
+		$selector.classList.remove('active');
 		window.removeEventListener('scroll', requestScroll);
 	}
 
@@ -498,11 +464,11 @@ const scroller = function ( selector, options ) {
 		}
 
 		if ( percent > 1 ) {
-			$wrap.classList.remove('active');
+			$selector.classList.remove('active');
 		} else if ( percent > 0 ) {
-			$wrap.classList.add('active');
+			$selector.classList.add('active');
 		} else {
-			$wrap.classList.remove('active');
+			$selector.classList.remove('active');
 		}
 
 		options.scroll(scrollValue);
@@ -517,7 +483,7 @@ const scroller = function ( selector, options ) {
 	window.addEventListener('resize', resize);
 }
 
-const calcValue = function (step, value, scrollTop, moveArea, easing) {
+const getStyleValueByStep = function (step, value, scrollTop, moveArea, easing) {
 	let partStart;
 	let partEnd;
 	let partArea;
