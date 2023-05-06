@@ -252,7 +252,7 @@ const App = function () {
 			for (let i = 0; i < movieVideoCount; i++) {
 				imgElem = new Image();
 				num = String(i + 1).length < 3 ? new Array(3 - String(i + 1).length + 1).join("0") + (i + 1) : String(i + 1);
-				imgElem.src = `../assets/video/movies8/ezgif-frame-${num}.jpg`;
+				imgElem.src = `assets/video/movies8/ezgif-frame-${num}.jpg`;
 				movieVideoImages.push(imgElem);
 			}
 		};
@@ -317,35 +317,35 @@ const App = function () {
 	
 		const lottieAnimation1 = lottie.loadAnimation({
 			container: $lottieBox1,
-			path: '../assets/lottie/91414-city-building-construction.json',
+			path: 'assets/lottie/91414-city-building-construction.json',
 			renderer: 'svg',
 			loop: false,
 			autoplay: false,
 		});
 		const lottieAnimation2 = lottie.loadAnimation({
 			container: $lottieBox2,
-			path: '../assets/lottie/66615-wave-blue-lines.json',
+			path: 'assets/lottie/66615-wave-blue-lines.json',
 			renderer: 'svg',
 			loop: false,
 			autoplay: false,
 		});
 		const lottieAnimation3 = lottie.loadAnimation({
 			container: $lottieBox3,
-			path: '../assets/lottie/107005-energyshares-tree1.json',
+			path: 'assets/lottie/107005-energyshares-tree1.json',
 			renderer: 'svg',
 			loop: false,
 			autoplay: false,
 		});
 		const lottieAnimation4 = lottie.loadAnimation({
 			container: $lottieBox4,
-			path: '../assets/lottie/107006-energyshares-tree2.json',
+			path: 'assets/lottie/107006-energyshares-tree2.json',
 			renderer: 'svg',
 			loop: false,
 			autoplay: false,
 		});
 		const lottieAnimation5 = lottie.loadAnimation({
 			container: $lottieBox5,
-			path: '../assets/lottie/107008-energyshares-tree4.json',
+			path: 'assets/lottie/107008-energyshares-tree4.json',
 			renderer: 'svg',
 			loop: false,
 			autoplay: false,
